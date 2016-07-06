@@ -243,3 +243,14 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/PanicSelect/PanicSelect.py
+/PanicSelect/app/api_1_0/__pycache__
+/PanicSelect/app/main/__pycache__
+/PanicSelect/app/static/css/boostrap.min.css
+/PanicSelect/app/static/js/controllers.js
+/PanicSelect/app/static/js/services.js
+/PanicSelect/app/__pycache__
+/PanicSelect/env
+/PanicSelect/PanicSelect.pyproj
+/PanicSelect/PanicSelect.sln
+/PanicSelect/ptvs_virtualenv_proxy.py

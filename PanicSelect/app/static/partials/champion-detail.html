@@ -1,0 +1,112 @@
+<md-dialog aria-label="Champion Details" style="min-width: 98%; min-height: 98%">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Champion Details</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="static/img/svg/ic_clear_white_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="Winrates">
+                    <md-content class="md-padding">
+                        <p>Overall Winrate <strong>{{ details.key }}</strong></p>
+                        <p>Personal Winrate <strong>{{ detCtrl.champ.personal_win_percent }}</strong> Personal Games Analysed: <strong>{{ detCtrl.champ.personal_games }}</strong></p>
+                        <p>Overall Winrate <strong>{{ detCtrl.champ.matchup_win_percent }}</strong>Matchup Games Analysed: {{ detCtrl.champ.matchup_games }}</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Item Build">
+                    <md-content class="md-padding" style="overflow:visible">
+                        <div layout-gt-md="row"  layout="column" layout-align="center center">
+                            <div layout="column" layout-align="center start" flex>
+                                <div flex><h2>Most frequent starters</h2></div>
+                                <div flex>
+                                    <div layout="row" layout-align="center center" flex>
+                                        <md-list-item class="list-padding" ng-repeat="item in details.firstItems.mostGames.items" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
+                                                <span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
+                                                </span>
+                                            </a>
+
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex><p><strong>{{ details.firstItems.mostGames.games}}</strong> Games | <strong>{{ details.firstItems.mostGames.winPercent }}%</strong> Win Rate</p></div>
+                                
+                            </div>
+                            <div layout="column" layout-align="center start" flex>
+                                <div flex><h2>Highest win % starters</h2></div>
+                                <div flex>
+                                    <div layout="row" layout-align="center center" flex>
+                                        <md-list-item class="list-padding" ng-repeat="item in details.firstItems.highestWinPercent.items" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
+                                                <span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
+                                                </span>
+                                            </a>
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex><p><strong>{{ details.firstItems.highestWinPercent.games}}</strong> Games | <strong>{{ details.firstItems.highestWinPercent.winPercent }}%</strong> Win Rate</p></div>
+                            </div>
+                            <div layout="column" layout-align="center start" flex>
+                                <div flex><h2>Most frequent core build</h2></div>
+                                <div flex>
+                                    <div layout="row" layout-align="center center" flex>
+                                        <md-list-item class="list-padding" ng-repeat="item in details.items.mostGames.items" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
+                                                <span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
+                                                </span>
+                                            </a>
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex><p><strong>{{ details.items.mostGames.games}}</strong> Games | <strong>{{ details.items.mostGames.winPercent }}%</strong> Win Rate</p></div>
+                            </div>
+                            <div layout="column" layout-align="center start" flex>
+                                <div flex><h2>Highest win % core build</h2></div>
+                                <div flex>
+                                    <div layout="row" layout-align="center center" flex>
+                                        <md-list-item class="list-padding" ng-repeat="item in details.items.highestWinPercent.items" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
+                                                <span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
+                                                </span>
+                                            </a>
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex><p><strong>{{ details.items.highestWinPercent.games}}</strong> Games | <strong>{{ details.items.highestWinPercent.winPercent }}%</strong> Win Rate</p></div>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Skill Order">
+                    <md-content class="md-padding">
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Summoners">
+                    <md-content class="md-padding">
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Masteries">
+                    <md-content class="md-padding">
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Runes">
+                    <md-content class="md-padding">
+                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+    </form>
+</md-dialog>

@@ -1,0 +1,87 @@
+<div ng-controller="ChampionOverviewController as ctrl">
+    <div class="jumbotron">
+        <h1>Hello, Summoners!</h1>
+        <p>Panic Select is designed to help you pick a champion which will give you the highest chance of winning based on real and up-to-date data.</p>
+    </div>
+    <md-content layout-gt-sm="column" layout-padding>
+        <form name="championForm">
+            <md-input-container class="md-block">
+                <label>Summoner</label>
+                <input name="summoner" ng-model="summoner" required>
+                <div class="errors" ng-messages="championForm.summoner.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Region</label>
+                <md-select name="region" ng-model="region" required>
+                    <md-option value="NA">North America (NA)</md-option>
+                    <md-option value="EUW">Europe West (EUW)</md-option>
+                    <md-option value="EUNE">Europe Nordic and East (EUNE)</md-option>
+                    <md-option value="BR">Brazil (BR)</md-option>
+                    <md-option value="LAN">Latin America North (LAN)</md-option>
+                    <md-option value="LAS">Latin America South (LAS)</md-option>
+                    <md-option value="KR">Korea (KR)</md-option>
+                    <md-option value="OCE">Oceania (OCE)</md-option>
+                    <md-option value="TR">Turkey (TR)</md-option>
+                    <md-option value="RU">Russia (RU)</md-option>
+                </md-select>
+                <div ng-messages="championForm.region.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Role</label>
+                <md-select name="role" ng-model="role" required>
+                    <md-option value="Top">Top</md-option>
+                    <md-option value="Jungle">Jungle</md-option>
+                    <md-option value="Middle">Middle</md-option>
+                    <md-option value="ADC">ADC</md-option>
+                    <md-option value="Support">Support</md-option>
+                </md-select>
+                <div ng-messages="championForm.role.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+                    <md-autocomplete md-search-text="searchText"
+                                     md-selected-item="matchup"
+                                     md-items="item in ctrl.querySearch(searchText)"
+                                     md-item-text="item.display"
+                                     md-min-length="0"
+                                     md-floating-label="Matchup">
+                        <md-item-template>
+                            <span md-highlight-text="ctrl.matchup" md-highlight-flags="^i">{{item.display}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            No champions by the name of "{{ searchText }}" were found.
+                        </md-not-found>
+                    </md-autocomplete>    
+            <bind-expression name="matchup" expression="matchup" ng-model="matchup" /> 
+            <div  layout="row" layout-sm="column" layout-align="space-around">
+                <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <md-button class="md-raised md-primary" ng-disabled="championForm.$invalid" ng-click="searchChampions()">Search</md-button>
+
+        </form>
+    </md-content>
+    
+    <md-list>
+        <md-subheader ng-if="champions" class="md-no-sticky">Champions for you to pick ordered by rating:</md-subheader>
+        <md-divider ng-if="champions"></md-divider>
+        <md-list-item ng-repeat="champ in champions" class="secondary-button-padding">
+            <img alt="{{ champ.name }}" ng-src="{{ champ.img_url }}" class="md-avatar" />
+            <p><strong>{{ champ.name }}</strong> <small>Rating: {{champ.rating}}</small></p>
+            <md-button hide-xs class="md-secondary" ng-click="showChampionDetailsDialog(champ, $event)">Show Details</md-button>
+            <md-button hide show-xs class="md-secondary md-icon-button" ng-click="showChampionDetailsDialog(champ, $event)">
+                <md-icon md-svg-icon="static/img/svg/ic_expand_more_black_24px.svg"></md-icon>
+            </md-button>
+            <md-divider ng-if="!$last"></md-divider>
+        </md-list-item>
+    </md-list>
+    <md-divider></md-divider>
+        <md-subheader>
+            Panic Select isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved
+            in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of
+            Riot Games, Inc. League of Legends © Riot Games, Inc
+        </md-subheader>
+</div>
