@@ -1,7 +1,7 @@
 ﻿'use strict';
-angular.module("LoLFountain", ['ngRoute', 'ngResource', 'ngMaterial', 'ngMessages', 'ngMdIcons']);
+angular.module("PanicSelect", ['ngRoute', 'ngResource', 'ngMaterial', 'ngMessages', 'ngMdIcons']);
 
-angular.module('LoLFountain').config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
+angular.module('PanicSelect').config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
         function ($routeProvider, $locationProvider, $mdThemingProvider) {
             $routeProvider
                 .when('/', {
@@ -22,7 +22,7 @@ angular.module('LoLFountain').config(['$routeProvider', '$locationProvider', '$m
                 .accentPalette('orange');
         }]);
 
-angular.module('LoLFountain')
+angular.module('PanicSelect')
     .factory('Champion', function ($resource) {
         return $resource('/api/v1.0/ratings', {}, {
             query: {
@@ -31,7 +31,8 @@ angular.module('LoLFountain')
             }
         });
     });
-angular.module('LoLFountain')
+
+angular.module('PanicSelect')
     .factory('ChampionDetail', function ($resource) {
         return $resource('/api/v1.0/details/:champion/:role', { champion: '@champion', role: '@role'}, {
             query: {
@@ -40,7 +41,18 @@ angular.module('LoLFountain')
             }
         });
     });
-angular.module('LoLFountain')
+
+angular.module('PanicSelect')
+    .controller('NavController', ['$scope', '$mdSidenav', function NavController($scope, $mdSidenav) {
+        $scope.open = function () {
+            $mdSidenav('sideNav').open()
+        };
+        $scope.close = function () {
+            $mdSidenav('sideNav').close()
+        };
+    }]);
+
+angular.module('PanicSelect')
     .controller('ChampionDetailController', ['$scope', '$mdDialog', function ChampionDetailController($scope, $mdDialog) {
         $scope.hide = function () {
             $mdDialog.hide();
@@ -54,7 +66,7 @@ angular.module('LoLFountain')
         $scope.answer = null;
     }]);
 
-angular.module('LoLFountain')
+angular.module('PanicSelect')
     .controller('ChampionOverviewController',['$scope', 'Champion','ChampionDetail', '$mdDialog', '$mdMedia', '$q', '$timeout', function ($scope, Champion, ChampionDetail, $mdDialog, $mdMedia, $q, $timeout) {
         var self = this;
         self.simulateQuery = false;

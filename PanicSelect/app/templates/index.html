@@ -1,6 +1,6 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
-<html lang="en" ng-app="LoLFountain">
+<html lang="en" ng-app="PanicSelect">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">    
@@ -9,22 +9,44 @@
     <link rel="stylesheet" href="static/css/custom.css" />
 </head>
 <body ng-cloak>
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2 class="md-title">
-                <span>Panic Select</span>
-            </h2>
-            <md-button ng-href="/" class="md-primary" aria-label="Home">
-                <md-icon md-svg-src="static/img/svg/ic_home_white_24px.svg"></md-icon>
-            </md-button>
-            <span flex></span>
-            <md-button aria-label="Menu">
-                <ng-md-icon icon="menu" style="fill:white"></ng-md-icon>
-            </md-button>
-            <md-button aria-label="About" ng-href="/about">About</md-button>
-            <md-button aria-label="Donate" ng-href="/donate">Donate</md-button>
-        </div>
-    </md-toolbar>
+    <div ng-controller="NavController">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <a href="/">
+                    <h2 class="md-title">
+                        <span>Panic Select</span>
+                    </h2>
+                </a>
+                <span flex></span>
+                <md-button hide-xs aria-label="About" ng-href="/about">About</md-button>
+                <md-button hide-xs aria-label="Donate" ng-href="/donate">Donate</md-button>
+                <ng-md-icon hide-gt-xs icon="menu" style="fill:white" ng-click="open()"></ng-md-icon>
+            </div>
+        </md-toolbar>
+        <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="sideNav">
+            <md-toolbar class="md-theme-light">
+                <div class="md-toolbar-tools">
+                    <h2 class="md-toolbar-tools">
+                        <span>Menu</span>
+                    </h2>
+                    <span flex></span>
+                    <ng-md-icon hide-gt-xs icon="close" style="fill:white" ng-attr-style="fill: white" ng-click="close()"></ng-md-icon>
+                </div>
+            </md-toolbar>
+            <md-content ng-cloak>
+                <md-list layout-fill >
+                    <md-list-item ng-href="/about" ng-click="close()">
+                        <ng-md-icon icon="info_outline" style="fill:grey; line-height: initial; margin-right:32px" ng-attr-style="fill: white"></ng-md-icon>
+                        <p>About</p>
+                    </md-list-item>
+                    <md-list-item ng-href="/donate" ng-click="close()">
+                        <ng-md-icon icon="payment" style="fill:grey; line-height: initial; margin-right:32px" ng-attr-style="fill: white"></ng-md-icon>
+                        <p>Donate</p>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </md-sidenav>
+    </div>
     <div layout="column" class="container" ng-view>
         
     </div>
