@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module("LoLFountain", ['ngRoute', 'ngResource', 'ngMaterial', 'ngMessages']);
+angular.module("LoLFountain", ['ngRoute', 'ngResource', 'ngMaterial', 'ngMessages', 'ngMdIcons']);
 
 angular.module('LoLFountain').config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
         function ($routeProvider, $locationProvider, $mdThemingProvider) {
