@@ -33,14 +33,18 @@
                     <ng-md-icon hide-gt-xs icon="close" style="fill:white" ng-attr-style="fill: white" ng-click="close()"></ng-md-icon>
                 </div>
             </md-toolbar>
-            <md-content ng-cloak>
-                <md-list layout-fill >
+            <md-content>
+                <md-list layout-fill>
+                    <md-list-item ng-href="/" ng-click="close()">
+                        <ng-md-icon icon="home" style="fill:grey; line-height: initial; margin-right:32px" ng-attr-style="fill: grey"></ng-md-icon>
+                        <p>Home</p>
+                    </md-list-item>
                     <md-list-item ng-href="/about" ng-click="close()">
-                        <ng-md-icon icon="info_outline" style="fill:grey; line-height: initial; margin-right:32px" ng-attr-style="fill: white"></ng-md-icon>
+                        <ng-md-icon icon="info_outline" style="fill:grey; line-height: initial; margin-right:32px" ng-attr-style="fill: grey"></ng-md-icon>
                         <p>About</p>
                     </md-list-item>
                     <md-list-item ng-href="/donate" ng-click="close()">
-                        <ng-md-icon icon="payment" style="fill:grey; line-height: initial; margin-right:32px" ng-attr-style="fill: white"></ng-md-icon>
+                        <ng-md-icon icon="payment" style="fill:grey; line-height: initial; margin-right:32px" ng-attr-style="fill: grey"></ng-md-icon>
                         <p>Donate</p>
                     </md-list-item>
                 </md-list>
