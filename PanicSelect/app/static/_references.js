@@ -1,4 +1,4 @@
-﻿/// <autosync enabled="True" />
+/// <autosync enabled="True" />
 /// <reference path="static/lib" />
 /// <reference path="js/app.js" />
 /// <reference path="js/controllers.js" />

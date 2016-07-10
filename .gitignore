@@ -94,3 +94,4 @@ env/
 /PanicSelect/app/static/js/services.js
 /PanicSelect/app/static/css/boostrap.min.css
 /PanicSelect/.vs/config
+/nbproject/private/

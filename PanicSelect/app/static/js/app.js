@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 angular.module("PanicSelect", ['ngRoute', 'ngResource', 'ngMaterial', 'ngMessages', 'ngMdIcons']);
 
 angular.module('PanicSelect').config(['$routeProvider', '$locationProvider', '$mdThemingProvider',
@@ -21,7 +21,7 @@ angular.module('PanicSelect').config(['$routeProvider', '$locationProvider', '$m
                 .primaryPalette('blue')
                 .accentPalette('orange');
         }]);
-
+    
 angular.module('PanicSelect')
     .factory('Champion', function ($resource) {
         return $resource('/api/v1.0/ratings', {}, {

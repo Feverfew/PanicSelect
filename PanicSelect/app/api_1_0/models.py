@@ -5,7 +5,7 @@ import py_gg
 import json
 import threading
 
-LOL_VERSION = '6.12.1'
+LOL_VERSION = '6.13.1'
 
 class ChampionPickGenerator(object):
     """This class collects all API data needed to generate the list of best champs"""
