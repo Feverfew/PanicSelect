@@ -4,7 +4,9 @@
         <p>Panic Select is designed to help you pick a champion which will give you the highest chance of winning based on real and up-to-date data.</p>
     </div>
     <md-content layout-gt-sm="column" layout-padding>
-        <div ng-show="errorsExist" class="alert alert-danger"><strong>Error: </strong>{{ errorMessage }}</div>
+        <div ng-show="errorsExist" class="alert alert-danger">
+            <p ng-repeat="message in errorMessages"><strong>Error: </strong>{{ message }}</p>
+        </div>
         <form name="championForm">
             <md-input-container class="md-block">
                 <label>Summoner</label>

@@ -135,7 +135,7 @@ angular.module('PanicSelect')
                         $scope.isLoading = false;
                         $scope.errorsExist = true;
                         $scope.champions = null;
-                        $scope.errorMessage = champions.data.message[0];
+                        $scope.errorMessages = champions.data.message;
                     }
                 }
             );
