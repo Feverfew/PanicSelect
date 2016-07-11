@@ -28,6 +28,7 @@
                     <md-option value="OCE">Oceania (OCE)</md-option>
                     <md-option value="TR">Turkey (TR)</md-option>
                     <md-option value="RU">Russia (RU)</md-option>
+                    <md-option value="JP">Japan (JP)</md-option>
                 </md-select>
                 <div ng-messages="championForm.region.$error">
                     <div ng-message="required">This is required.</div>
@@ -63,7 +64,6 @@
             <div  layout="row" layout-sm="column" layout-align="space-around">
                 <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
             </div>
-            
             <md-button class="md-raised md-primary" ng-disabled="championForm.$invalid" ng-click="searchChampions()">Search</md-button>
 
         </form>
