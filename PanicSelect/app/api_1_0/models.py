@@ -2,7 +2,6 @@ from cassiopeia import riotapi
 from cassiopeia.type.api.exception import APIError
 from py_gg import InvalidAPIKeyError
 import py_gg
-import json
 import threading
 
 LOL_VERSION = '6.13.1'
@@ -83,11 +82,19 @@ class ChampionPickGenerator(object):
         if self.matchup:
             try:
                 data = py_gg.champion.matchup(self.matchup)
-                for champ in self.champions:
-                    winrate_games = search_matchup_winrates(data[0]['matchups'], champ.key)
-                    if winrate_games[0] and winrate_games[1]:
-                        champ.matchup_win_percent = 100 - winrate_games[0]
-                        champ.matchup_games = winrate_games[1]
+                role_found = False
+                for matchup_list in data:
+                    if matchup_list['role'] == self.role:
+                        role_found = True
+                        data = matchup_list['matchups']
+                if role_found:
+                    for champ in self.champions:
+                        winrate_games = search_matchup_winrates(data, champ.key)
+                        if winrate_games[0] and winrate_games[1]:
+                            champ.matchup_win_percent = 100 - winrate_games[0]
+                            champ.matchup_games = winrate_games[1]
+                else:
+                    self.api_errors.append("Matchups against {} do not exist for the role of {}".format(self.matchup, self.role))
             except:
                 self.api_errors.append("Champion.gg API failed to respond")
             

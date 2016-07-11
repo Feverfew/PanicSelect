@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" ng-app="PanicSelect">
 <head>
     <meta charset="utf-8" />
@@ -7,8 +6,9 @@
     <title>Panic Select</title>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <link rel="stylesheet" href="static/css/custom.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 </head>
-<body>
+<body ng-cloak>
     <div ng-controller="NavController">
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -50,11 +50,8 @@
                 </md-list>
             </md-content>
         </md-sidenav>
-    </div>
-    <div layout="column" class="container" ng-view>
-        
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    </span>
+    <div layout="column" class="container" ng-view></div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-resource.min.js"></script>
@@ -64,6 +61,4 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
     <script src="static/js/app.js"></script>
 </body>
-
-
 </html>
