@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from . import api_1_0, models
+
 def bad_request(message):
     response = jsonify({'error': 'bad request', 'message': message})
     response.status_code = 400
@@ -17,13 +18,18 @@ def forbidden(message):
     response.status_code = 403
     return response
 
+
+def not_found():
+    response = jsonify({'error': 'not found', 'message': message})
+    response.status_code = 404
+    return response
+
+
 @api_1_0.route('/ratings')
 def champions_rating():
     errors = []
     regions = ['EUW','EUNE','NA','BR','OCE','LAN','LAS','TR','RU']
     roles = ['JUNGLE', 'TOP', 'MIDDLE', 'ADC', 'SUPPORT']
-    counter_region = 0
-    counter_role = 0
     summoner = request.args.get('summoner') #Gets the summoner name from the URL
     region = request.args.get('region')
     role = request.args.get('role')
@@ -44,6 +50,7 @@ def champions_rating():
         return bad_request(pick.api_errors)
     json_string = {'champions':[champion.to_json() for champion in pick.champions]} #Makes a variable for the output as a json  
     return jsonify(json_string)
+
 
 @api_1_0.route('/details/<champion>/<role>')
 def champion_details(champion, role):

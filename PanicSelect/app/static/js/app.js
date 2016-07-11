@@ -67,7 +67,10 @@ angular.module('PanicSelect')
     }]);
 
 angular.module('PanicSelect')
-    .controller('ChampionOverviewController',['$scope', 'Champion','ChampionDetail', '$mdDialog', '$mdMedia', '$q', '$timeout', function ($scope, Champion, ChampionDetail, $mdDialog, $mdMedia, $q, $timeout) {
+    .controller('ChampionOverviewController',['$scope', 'Champion',
+    'ChampionDetail', '$mdDialog', '$mdMedia', '$q', '$timeout', 
+    '$mdToast', function ($scope, Champion, ChampionDetail, $mdDialog, $mdMedia,
+     $q, $timeout, $mdToast) {
         var self = this;
         self.simulateQuery = false;
         // list of `champion` value/display objects
@@ -122,10 +125,20 @@ angular.module('PanicSelect')
                 matchup = matchup.replace(/'/g, '');
             }
             
-            var query = Champion.query({ summoner: $scope.summoner, region: $scope.region, role: $scope.role, matchup: matchup }, function (champions) {
-                $scope.isLoading = false;
-                $scope.champions = champions.champions;
-            });
+            var query = Champion.query({ summoner: $scope.summoner, region: $scope.region, role: $scope.role, matchup: matchup}, 
+                function (champions) {
+                    $scope.isLoading = false;
+                    $scope.errorsExist = false;
+                    $scope.champions = champions.champions;
+                }, function (champions) {
+                    if (champions.status != 200) {
+                        $scope.isLoading = false;
+                        $scope.errorsExist = true;
+                        $scope.champions = null;
+                        $scope.errorMessage = champions.data.message[0];
+                    }
+                }
+            );
             $scope.$apply;
         }
         $scope.showChampionDetailsDialog = function (champ, ev) {
