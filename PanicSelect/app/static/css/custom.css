@@ -27,6 +27,9 @@
     max-height: 36px;
     max-width: 36px;
 }
+.rune {
+    margin-right: 5px;
+}
 .list-padding {
     margin: 0 -13px;
     display: inline-block;
@@ -50,4 +53,11 @@ md-list-item {
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
+}
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-color: rgba(0,0,0,0.12);
+  border-right-style: solid;
+  height: 100%;
 }

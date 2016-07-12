@@ -20,70 +20,72 @@
                 </md-tab>
                 <md-tab label="Item Build">
                     <md-content class="md-padding" style="overflow:visible">
-                        <div layout-gt-md="row"  layout="column" layout-align="center center">
-                            <div layout="column" layout-align="center start" flex>
+                        <md-list layout-gt-md="row"  layout="column" layout-align="center center">
+                            <md-list-item layout="column" layout-align="center center" flex>
                                 <div flex><h2>Most frequent starters</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
                                         <md-list-item class="list-padding" ng-repeat="item in details.firstItems.mostGames.items" flex>
                                             <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
-                                                <span>
-                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
-                                                </span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
                                             </a>
 
                                         </md-list-item>
                                     </div>
                                 </div>
                                 <div flex><p><strong>{{ details.firstItems.mostGames.games}}</strong> Games | <strong>{{ details.firstItems.mostGames.winPercent }}%</strong> Win Rate</p></div>
-                                
-                            </div>
-                            <div layout="column" layout-align="center start" flex>
+                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                            <md-divider hide-gt-md ></md-divider>    
+                            </md-list-item>
+                            <md-list-item layout="column" layout-align="center center" flex>
                                 <div flex><h2>Highest win % starters</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
                                         <md-list-item class="list-padding" ng-repeat="item in details.firstItems.highestWinPercent.items" flex>
                                             <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
-                                                <span>
-                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
-                                                </span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
                                             </a>
                                         </md-list-item>
                                     </div>
                                 </div>
                                 <div flex><p><strong>{{ details.firstItems.highestWinPercent.games}}</strong> Games | <strong>{{ details.firstItems.highestWinPercent.winPercent }}%</strong> Win Rate</p></div>
-                            </div>
-                            <div layout="column" layout-align="center start" flex>
+                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                            <md-divider hide-gt-md ></md-divider>
+                            </md-list-item>
+                            <md-list-item layout="column" layout-align="center center" flex>
                                 <div flex><h2>Most frequent core build</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
                                         <md-list-item class="list-padding" ng-repeat="item in details.items.mostGames.items" flex>
                                             <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
-                                                <span>
-                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
-                                                </span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
                                             </a>
                                         </md-list-item>
                                     </div>
                                 </div>
                                 <div flex><p><strong>{{ details.items.mostGames.games}}</strong> Games | <strong>{{ details.items.mostGames.winPercent }}%</strong> Win Rate</p></div>
-                            </div>
-                            <div layout="column" layout-align="center start" flex>
+                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                            <md-divider hide-gt-md ></md-divider>
+                            </md-list-item>
+                            <md-list-item layout="column" layout-align="center center" flex>
                                 <div flex><h2>Highest win % core build</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
                                         <md-list-item class="list-padding" ng-repeat="item in details.items.highestWinPercent.items" flex>
                                             <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
-                                                <span>
-                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/6.12.1/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
-                                                </span>
+                                                    <img class="item" src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
                                             </a>
                                         </md-list-item>
                                     </div>
                                 </div>
-                                <div flex><p><strong>{{ details.items.highestWinPercent.games}}</strong> Games | <strong>{{ details.items.highestWinPercent.winPercent }}%</strong> Win Rate</p></div>
-                            </div>
-                        </div>
+                                <div flex>
+                                    <p>
+                                        <strong>{{ details.items.highestWinPercent.games}}</strong> Games | 
+                                        <strong>{{ details.items.highestWinPercent.winPercent }}%</strong> Win Rate
+                                    </p>
+                                </div>
+                            </md-list-item>
+                        </md-list>
                     </md-content>
                 </md-tab>
                 <md-tab label="Skill Order">
@@ -93,7 +95,66 @@
                 </md-tab>
                 <md-tab label="Summoners">
                     <md-content class="md-padding">
-                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                        <md-list layout-gt-md="row"  layout="column" layout-align="center center">
+                            <md-list-item layout="column" layout-align="center center" flex>
+                                <div flex><h2>Most frequent summoners</h2></div>
+                                <div flex>
+                                    <div layout="row" layout-align="center center" flex>
+                                        <md-list-item class="list-padding" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ details.summoners.mostGames.summoner1.name }}" rel="nofollow" target="_blank">
+                                                    <img class="item" 
+                                                        src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/spell/Summoner{{ details.summoners.mostGames.summoner1.other }}.png"
+                                                        alt="{{ details.summoners.mostGames.summoner1.name}}" />
+                                            </a>
+                                        </md-list-item>
+                                        <md-list-item class="list-padding" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ details.summoners.mostGames.summoner2.name }}" rel="nofollow" target="_blank">
+                                                <span>
+                                                    <img class="item" 
+                                                        src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/spell/Summoner{{ details.summoners.mostGames.summoner2.other }}.png"
+                                                        alt="{{ details.summoners.mostGames.summoner2.name}}" />
+                                                </span>
+                                            </a>
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex>
+                                    <p>
+                                        <strong>{{ details.summoners.mostGames.games}}</strong> Games | 
+                                        <strong>{{ details.summoners.mostGames.winPercent }}%</strong> Win Rate
+                                    </p>
+                                </div>
+                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                            <md-divider hide-gt-md ></md-divider>
+                            </md-list-item>
+                            <md-list-item layout="column" layout-align="center center" flex>
+                                <div flex><h2>Highest win % summoners</h2></div>
+                                <div flex>
+                                    <div layout="row" layout-align="center center" flex>
+                                        <md-list-item class="list-padding" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ details.summoners.highestWinPercent.summoner1.name }}" rel="nofollow" target="_blank">
+                                                    <img class="item" 
+                                                        src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/spell/Summoner{{ details.summoners.highestWinPercent.summoner1.other }}.png"
+                                                        alt="{{ details.summoners.highestWinPercent.summoner1.name}}" />
+                                            </a>
+                                        </md-list-item>
+                                        <md-list-item class="list-padding" flex>
+                                            <a href="http://leagueoflegends.wikia.com/wiki/{{ details.summoners.highestWinPercent.summoner2.name }}" rel="nofollow" target="_blank">
+                                                    <img class="item" 
+                                                        src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/spell/Summoner{{ details.summoners.highestWinPercent.summoner2.other }}.png"
+                                                        alt="{{ details.summoners.highestWinPercent.summoner2.name}}" />
+                                            </a>
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex>
+                                    <p>
+                                        <strong>{{ details.summoners.highestWinPercent.games}}</strong> Games | 
+                                        <strong>{{ details.summoners.highestWinPercent.winPercent }}%</strong> Win Rate
+                                    </p>
+                                </div>    
+                            </md-list-item>
+                        </md-list>
                     </md-content>
                 </md-tab>
                 <md-tab label="Masteries">
@@ -103,7 +164,48 @@
                 </md-tab>
                 <md-tab label="Runes">
                     <md-content class="md-padding">
-                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                        <md-list layout-gt-md="row"  layout="column" layout-align="center start">
+                            <md-list-item layout="column" layout-align="center center">
+                                <div flex><h2>Most frequent runes</h2></div>
+                                <div flex>
+                                    <div layout="column" layout-align="center start">
+                                        <md-list-item ng-repeat="rune in details.runes.mostGames.runes">
+                                            <img class="rune" 
+                                                src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/rune/{{ rune.id }}"
+                                                alt="{{ rune.name}}" />
+                                            <p> <strong>{{ rune.number}}x</strong> {{rune.name}}: {{ rune.description }}</p>
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex>
+                                    <p>
+                                        <strong>{{ details.runes.mostGames.games}}</strong> Games | 
+                                        <strong>{{ details.runes.mostGames.winPercent }}%</strong> Win Rate
+                                    </p>
+                                </div>    
+                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                            <md-divider hide-gt-md ></md-divider>
+                            </md-list-item>
+                            <md-list-item layout="column" layout-align="center center">
+                                <div flex><h2>Highest win % runes</h2></div>
+                                <div flex>
+                                    <div layout="column" layout-align="center start">
+                                        <md-list-item ng-repeat="rune in details.runes.highestWinPercent.runes">
+                                            <img class="rune" 
+                                                src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/rune/{{ rune.id }}"
+                                                alt="{{ rune.name}}" />
+                                            <p> <strong>{{ rune.number}}x</strong> {{rune.name}}: {{ rune.description }}</p>
+                                        </md-list-item>
+                                    </div>
+                                </div>
+                                <div flex>
+                                    <p>
+                                        <strong>{{ details.runes.highestWinPercent.games}}</strong> Games | 
+                                        <strong>{{ details.runes.highestWinPercent.winPercent }}%</strong> Win Rate
+                                    </p>
+                                </div>    
+                            </md-list-item>
+                        </md-list>
                     </md-content>
                 </md-tab>
             </md-tabs>

@@ -30,7 +30,7 @@ def champions_rating():
     errors = []
     regions = ['EUW','EUNE','NA','BR','OCE','LAN','LAS','TR','RU', 'JP']
     roles = ['JUNGLE', 'TOP', 'MIDDLE', 'ADC', 'SUPPORT']
-    summoner = request.args.get('summoner') #Gets the summoner name from the URL
+    summoner = request.args.get('summoner')
     region = request.args.get('region')
     role = request.args.get('role')
     matchup = request.args.get('matchup') or None
@@ -56,6 +56,8 @@ def champions_rating():
 def champion_details(champion, role):
     errors = []
     generator = models.ChampionDetailGenerator(champion, role)
+    if generator.api_errors:
+        return bad_request(generator.api_errors)
     champ_details = generator.get_champion_detail()
     if generator.api_errors:
         return bad_request(generator.api_errors)
