@@ -4,8 +4,6 @@ from py_gg import InvalidAPIKeyError
 import py_gg
 import threading
 
-LOL_VERSION = '6.13.1'
-
 class ChampionPickGenerator(object):
     """This class collects all API data needed to generate the list of best champs"""
 
@@ -277,7 +275,7 @@ class ChampionDetailGenerator(object):
         except:
             self.api_errors.append("Champion.gg API failed to respond")
     
-    def replace_rune_id_and_add_version(self, data):
+    def replace_rune_id(self, data):
         """replace the ids with the url to the cdn and add version
         :param data: details of a champion in a given role
         :param type: dict
@@ -293,6 +291,22 @@ class ChampionDetailGenerator(object):
                 if riot_rune.id == data_rune["id"]:
                     data["runes"]["mostGames"]["runes"][rune_number]["id"] = riot_rune.image.link
         return data
+    
+    def get_spell_image_link(self, data):
+        """Finds the url to the image of a spell
+        :param data: details of a champion in a given role
+        :param type: dict
+        :rtype: dict
+        """
+        champions_list = riotapi.get_champions()
+        for champion in champions_list:
+            if self.champion == champion.key:
+                for counter, spell in enumerate(champion.spells):
+                    data["skills"]["skillInfo"][counter]["image"] = spell.image.link
+                return data
+        self.api_errors("Riot API error occured")
+        return data
+        
     
     def replace_summoner_id(self, data):
         """Replace names of summoner abilities for the url to the cdn
@@ -348,9 +362,11 @@ class ChampionDetailGenerator(object):
         except:
             self.api_errors.append("Champion.gg API failed to respond")
             return None
-        data = self.replace_rune_id_and_add_version(data)
+        data = self.replace_rune_id(data)
         data = self.replace_summoner_id(data)
+        data = self.get_spell_image_link(data)
         data["version"] = self.lol_version
+        data["key"] = self.champion
         return data
         
         
