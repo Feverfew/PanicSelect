@@ -20,24 +20,28 @@
                 </md-tab>
                 <md-tab label="Item Build">
                     <md-content class="md-padding" style="overflow:visible">
-                        <md-list layout-gt-md="row"  layout="column" layout-align="center center">
+                        <div layout-gt-md="row"  layout="column" layout-align="center center">
                             <md-list-item layout="column" layout-align="center center" flex>
+                                <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                                <md-divider hide-gt-md ></md-divider>   
                                 <div flex><h2>Most frequent starters</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
-                                        <md-list-item class="list-padding" ng-repeat="item in details.firstItems.mostGames.items" flex>
+                                        <md-list-item class="list-padding md-clickable" ng-repeat="item in details.firstItems.mostGames.items" flex>
                                             <a href="http://leagueoflegends.wikia.com/wiki/{{ item.name }}" rel="nofollow" target="_blank">
+                                                <span>
                                                     <img class="item" src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/item/{{ item.id }}.png" alt="{{ item.name }}" />
+                                                </span>
                                             </a>
-
                                         </md-list-item>
                                     </div>
                                 </div>
                                 <div flex><p><strong>{{ details.firstItems.mostGames.games}}</strong> Games | <strong>{{ details.firstItems.mostGames.winPercent }}%</strong> Win Rate</p></div>
-                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
-                            <md-divider hide-gt-md ></md-divider>    
+ 
                             </md-list-item>
                             <md-list-item layout="column" layout-align="center center" flex>
+                                <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                                <md-divider hide-gt-md ></md-divider>       
                                 <div flex><h2>Highest win % starters</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
@@ -49,10 +53,10 @@
                                     </div>
                                 </div>
                                 <div flex><p><strong>{{ details.firstItems.highestWinPercent.games}}</strong> Games | <strong>{{ details.firstItems.highestWinPercent.winPercent }}%</strong> Win Rate</p></div>
-                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
-                            <md-divider hide-gt-md ></md-divider>
                             </md-list-item>
                             <md-list-item layout="column" layout-align="center center" flex>
+                                <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                                <md-divider hide-gt-md ></md-divider>
                                 <div flex><h2>Most frequent core build</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
@@ -64,8 +68,7 @@
                                     </div>
                                 </div>
                                 <div flex><p><strong>{{ details.items.mostGames.games}}</strong> Games | <strong>{{ details.items.mostGames.winPercent }}%</strong> Win Rate</p></div>
-                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
-                            <md-divider hide-gt-md ></md-divider>
+                            
                             </md-list-item>
                             <md-list-item layout="column" layout-align="center center" flex>
                                 <div flex><h2>Highest win % core build</h2></div>
@@ -85,18 +88,24 @@
                                     </p>
                                 </div>
                             </md-list-item>
-                        </md-list>
+                        </div>
                     </md-content>
                 </md-tab>
                 <md-tab label="Skill Order">
                     <md-content class="md-padding">
-                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                        <div layout="row">
+                            <div layout="column">
+                                
+                            </div>
+                        </div>
                     </md-content>
                 </md-tab>
                 <md-tab label="Summoners">
                     <md-content class="md-padding">
                         <md-list layout-gt-md="row"  layout="column" layout-align="center center">
                             <md-list-item layout="column" layout-align="center center" flex>
+                                <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                                <md-divider hide-gt-md ></md-divider>
                                 <div flex><h2>Most frequent summoners</h2></div>
                                 <div flex>
                                     <div layout="row" layout-align="center center" flex>
@@ -124,8 +133,6 @@
                                         <strong>{{ details.summoners.mostGames.winPercent }}%</strong> Win Rate
                                     </p>
                                 </div>
-                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
-                            <md-divider hide-gt-md ></md-divider>
                             </md-list-item>
                             <md-list-item layout="column" layout-align="center center" flex>
                                 <div flex><h2>Highest win % summoners</h2></div>
@@ -166,6 +173,8 @@
                     <md-content class="md-padding">
                         <md-list layout-gt-md="row"  layout="column" layout-align="center start">
                             <md-list-item layout="column" layout-align="center center">
+                                <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                                <md-divider hide-gt-md ></md-divider>
                                 <div flex><h2>Most frequent runes</h2></div>
                                 <div flex>
                                     <div layout="column" layout-align="center start">
@@ -182,9 +191,7 @@
                                         <strong>{{ details.runes.mostGames.games}}</strong> Games | 
                                         <strong>{{ details.runes.mostGames.winPercent }}%</strong> Win Rate
                                     </p>
-                                </div>    
-                            <md-divider hide show-gt-md class="vertical-divider"></md-divider>
-                            <md-divider hide-gt-md ></md-divider>
+                                </div>
                             </md-list-item>
                             <md-list-item layout="column" layout-align="center center">
                                 <div flex><h2>Highest win % runes</h2></div>
