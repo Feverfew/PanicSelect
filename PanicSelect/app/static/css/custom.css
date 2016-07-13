@@ -64,17 +64,24 @@ md-list-item {
 .skill-block > div {
     height: 36px;
 }
-.skill-selected {
+.skill-selected > p{
+    border-radius: 50%;
     background: #2d8dc3;
     color: #fff;
     text-shadow: 0 1px 0 rgba(0,0,0,0.25);
     font-weight: bold;
     text-align: center;
-    line-height: 36px;
-}
-.skill-not-selected {
-    background: black;
+    display: inline-block;
+    margin: 0;
+    height:22px;
+    width: 22px;
+    margin: 8px 2px;
+    
+    
 }
 .class-index {
-    background: grey;
+    background: rgb(255, 91, 74);
+    color: black;
+    font-weight: bold;
+    line-height: 36px;
 }

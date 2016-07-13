@@ -95,10 +95,11 @@
                     <md-content class="md-padding">
                         <md-list layout-gt-md="row"  layout="column" layout-align="center center">
                             <md-list-item layout="column" layout-align="center center" flex>
+                                <md-divider hide show-gt-md class="vertical-divider"></md-divider>
+                                <md-divider hide-gt-md ></md-divider>
                                 <div flex><h2>Most freqeunt skill order</h2></div>
                                 <div layout="row"> 
                                     <div layout="column" class="skill-block">
-                                        <div class="spell" flex></div>
                                         <div class="spell" ng-repeat="skillInfo in details.skills.skillInfo" flex>
                                             <img src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/spell/{{ skillInfo.image }}" 
                                                  alt="{{skillInfo.name}}" 
@@ -106,16 +107,49 @@
                                         </div>
                                     </div>
                                     <div layout="column" class="skill-block" ng-repeat="spell in details.skills.mostGames.order track by $index">
-                                        <div class="class-index" flex>{{ ($index + 1) }}</div>
-                                        <div ng-show="spell === 'Q'" class="skill-selected" flex>Q</div>
+                                        <div ng-show="spell === 'Q'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
                                         <div ng-hide="spell === 'Q'" class="skill-not-selected" flex></div>
-                                        <div ng-show="spell === 'W'" class="skill-selected" flex>W</div>
+                                        <div ng-show="spell === 'W'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
                                         <div ng-hide="spell === 'W'" class="skill-not-selected" flex></div>
-                                        <div ng-show="spell === 'E'" class="skill-selected" flex>E</div>
+                                        <div ng-show="spell === 'E'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
                                         <div ng-hide="spell === 'E'" class="skill-not-selected" flex></div>
-                                        <div ng-show="spell === 'R'" class="skill-selected" flex>R</div>
+                                        <div ng-show="spell === 'R'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
                                         <div ng-hide="spell === 'R'" class="skill-not-selected" flex></div>
                                     </div>
+                                </div>
+                                <div flex>
+                                    <p>
+                                        <strong>{{ details.skills.mostGames.games}}</strong> Games | 
+                                        <strong>{{ details.skills.mostGames.winPercent }}%</strong> Win Rate
+                                    </p>
+                                </div>
+                            </md-list-item>
+                            <md-list-item layout="column" layout-align="center center" flex>
+                                <div flex><h2>Highest win % skill order</h2></div>
+                                <div layout="row"> 
+                                    <div layout="column" class="skill-block">
+                                        <div class="spell" ng-repeat="skillInfo in details.skills.skillInfo" flex>
+                                            <img src="http://ddragon.leagueoflegends.com/cdn/{{ details.version }}/img/spell/{{ skillInfo.image }}" 
+                                                 alt="{{skillInfo.name}}" 
+                                                 class="spell"/>
+                                        </div>
+                                    </div>
+                                    <div layout="column" class="skill-block" ng-repeat="spell in details.skills.highestWinPercent.order track by $index">
+                                        <div ng-show="spell === 'Q'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
+                                        <div ng-hide="spell === 'Q'" class="skill-not-selected" flex></div>
+                                        <div ng-show="spell === 'W'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
+                                        <div ng-hide="spell === 'W'" class="skill-not-selected" flex></div>
+                                        <div ng-show="spell === 'E'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
+                                        <div ng-hide="spell === 'E'" class="skill-not-selected" flex></div>
+                                        <div ng-show="spell === 'R'" class="skill-selected" flex><p>{{ ($index + 1) }}</p></div>
+                                        <div ng-hide="spell === 'R'" class="skill-not-selected" flex></div>
+                                    </div>
+                                </div>
+                                <div flex>
+                                    <p>
+                                        <strong>{{ details.skills.highestWinPercent.games}}</strong> Games | 
+                                        <strong>{{ details.skills.highestWinPercent.winPercent }}%</strong> Win Rate
+                                    </p>
                                 </div>
                             </md-list-item>
                         </md-list>
