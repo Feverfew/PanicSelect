@@ -300,7 +300,7 @@ class ChampionDetailGenerator(object):
         """
         champions_list = riotapi.get_champions()
         for champion in champions_list:
-            if self.champion == champion.key:
+            if self.champion.upper() == champion.key.upper():
                 for counter, spell in enumerate(champion.spells):
                     data["skills"]["skillInfo"][counter]["image"] = spell.image.link
                 return data

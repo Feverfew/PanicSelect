@@ -142,18 +142,9 @@ angular.module('PanicSelect')
             $scope.$apply;
         }
         $scope.showChampionDetailsDialog = function (champ, ev) {
-            $scope.champ = champ
-            var details = ChampionDetail.get({ champion: champ.key, role: $scope.role }, function (details) {
-                $scope.details = details
-                console.log(details.key)
-            });
+            $scope.champ = champ;
             $mdDialog.show({
-                locals: {
-                    champ: champ,
-                    details: details
-                },
                 controller: 'ChampionDetailController',
-                controllerAs: 'detCtrl',
                 templateUrl: 'static/partials/champion-detail.html',
                 parent: angular.element(document.body),
                 scope: $scope,
@@ -161,6 +152,10 @@ angular.module('PanicSelect')
                 targetEvent: ev,
                 clickOutsideToClose: true
                 
-            })
+            }); 
+            var details = ChampionDetail.get({ champion: champ.key, role: $scope.role }, function (details) {
+                $scope.details = details;
+                console.log(details.key);
+            });
         };
     }]);

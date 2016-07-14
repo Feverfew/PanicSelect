@@ -1,4 +1,4 @@
-﻿.container {
+.container {
     margin-right:auto;
     margin-left:auto;
     padding-left:15px;
@@ -106,9 +106,14 @@ md-list-item {
 .mastery-header {
 	font-weight:700;
 	font-size:1.1em;
-	text-align:center
+	text-align: center;
+        color: #fff;
 }
-
+.mastery-row {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
 .mastery-container {
 	border-right:none!important;
 	position:relative;

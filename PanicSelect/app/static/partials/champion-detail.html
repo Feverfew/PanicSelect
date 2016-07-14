@@ -2,7 +2,7 @@
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Champion Details</h2>
+                <h2>{{ details.key }} Details</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <ng-md-icon icon="close" style="fill: white" ng-attr-style="fill: white" aria-label="Close dialog"></ng-md-icon>
@@ -14,8 +14,8 @@
                 <md-tab label="Winrates">
                     <md-content class="md-padding">
                         <p>Overall Winrate <strong>{{ details.key }}</strong></p>
-                        <p>Personal Winrate <strong>{{ detCtrl.champ.personal_win_percent }}</strong> Personal Games Analysed: <strong>{{ detCtrl.champ.personal_games }}</strong></p>
-                        <p>Overall Winrate <strong>{{ detCtrl.champ.matchup_win_percent }}</strong>Matchup Games Analysed: {{ detCtrl.champ.matchup_games }}</p>
+                        <p>Personal Winrate <strong>{{ champ.personal_win_percent }}</strong> Personal Games Analysed: <strong>{{ champ.personal_games }}</strong></p>
+                        <p>Overall Winrate <strong>{{ champ.matchup_win_percent }}</strong>Matchup Games Analysed: {{ champ.matchup_games }}</p>
                     </md-content>
                 </md-tab>
                 <md-tab label="Item Build">
@@ -221,7 +221,954 @@
                 </md-tab>
                 <md-tab label="Masteries">
                     <md-content class="md-padding">
-                        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                        <div layout="column" layout-align="center center">
+                            <div><h2>Most frequent masteries</h2></div>
+                            <div class="mastery-container" layout-gt-sm="row" layout="column">
+                                <div class="mastery0">
+                                    <div class="mastery-header">Ferocity - {{ details.masteries.mostGames.masteries[0].total }}</div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6111"
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[14].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[14].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[14].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[14].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[14].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[14].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[14].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6114" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[16].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[16].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[16].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[16].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[16].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[16].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[16].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6121" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[11].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[11].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[11].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[11].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[11].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[11].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[11].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6122" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[12].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[12].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[12].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[12].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[12].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[12].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[12].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6123" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[13].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[13].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[13].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[13].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[13].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[13].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[13].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6131" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[8].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[8].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[8].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[8].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[8].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[8].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[8].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6134" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[10].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[10].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[10].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[10].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[10].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[10].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[10].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6141" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[6].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[6].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[6].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[6].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[6].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[6].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[6].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6142" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[7].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[7].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[7].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[7].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[7].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[7].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[7].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6151" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[3].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[3].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[3].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[3].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[3].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[3].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[3].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6154" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[5].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[5].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[5].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[5].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[5].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[5].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[5].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6161" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[0].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[0].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[0].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[0].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[0].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[0].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[0].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6162" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[1].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[1].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[1].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[1].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[1].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[1].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[1].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6164" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[0].data[2].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[0].data[2].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[2].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[2].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[2].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[2].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[0].data[2].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mastery1">
+                                    <div class="mastery-header">Cunning - {{ details.masteries.mostGames.masteries[1].total }}</div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6311"
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[14].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[14].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[14].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[14].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[14].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[14].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[14].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6312" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[16].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[16].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[16].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[16].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[16].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[16].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[16].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6321" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[11].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[11].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[11].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[11].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[11].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[11].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[11].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6322" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[12].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[12].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[12].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[12].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[12].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[12].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[12].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6323" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[13].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[13].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[13].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[13].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[13].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[13].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[13].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6331" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[8].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[8].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[8].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[8].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[8].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[8].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[8].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6332" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[10].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[10].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[10].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[10].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[10].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[10].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[10].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6342" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[6].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[6].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[6].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[6].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[6].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[6].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[6].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6343" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[7].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[7].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[7].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[7].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[7].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[7].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[7].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6351" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[3].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[3].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[3].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[3].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[3].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[3].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[3].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6352" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[5].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[5].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[5].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[5].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[5].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[5].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[5].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6361" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[0].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[0].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[0].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[0].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[0].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[0].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[0].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6362" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[1].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[1].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[1].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[1].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[1].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[1].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[1].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6363" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[1].data[2].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[1].data[2].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[2].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[2].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[2].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[2].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[1].data[2].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mastery2">
+                                    <div class="mastery-header">Resolve - {{ details.masteries.mostGames.masteries[2].total }}</div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6211"
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[13].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[13].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[13].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[13].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[13].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[13].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[13].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6212" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[15].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[15].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[15].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[15].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[15].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[15].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[15].points > 4" class="point"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6221" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[11].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[11].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[11].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[11].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[11].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[11].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[11].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6223" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[12].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[12].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[12].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[12].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[12].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[12].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[12].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6231" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[8].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[8].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[8].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[8].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[8].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[8].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[8].points > 4" class="point"></div>
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6232" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[10].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[10].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[10].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[10].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[10].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[10].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[10].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6241" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[6].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[6].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[6].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[6].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[6].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[6].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[6].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6242" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[7].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[7].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[7].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[7].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[7].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[7].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[7].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6251" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[3].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[3].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[3].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[3].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[3].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[3].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[3].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6252" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[5].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[5].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[5].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[5].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[5].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[5].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[5].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6261" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[0].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[0].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[0].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[0].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[0].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[0].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[0].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6262" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[1].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[1].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[1].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[1].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[1].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[1].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[1].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6263" 
+                                             ng-class="{'mastery-active': details.masteries.mostGames.masteries[2].data[2].points !== 0}">
+                                            <div ng-if="details.masteries.mostGames.masteries[2].data[2].points" class="points">
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[2].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[2].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[2].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[2].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.mostGames.masteries[2].data[2].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                    <p>
+                                        <strong>{{ details.masteries.mostGames.games}}</strong> Games | 
+                                        <strong>{{ details.runes.mostGames.winPercent }}%</strong> Win Rate
+                                    </p>
+                            </div>
+                            <div><h2>Highest win % masteries</h2></div>
+                            <div class="mastery-container" layout-gt-sm="row" layout="column">
+                                <div class="mastery0">
+                                    <div class="mastery-header">Ferocity - {{ details.masteries.highestWinPercent.masteries[0].total }}</div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6111"
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[14].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[14].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[14].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[14].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[14].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[14].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[14].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6114" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[16].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[16].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[16].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[16].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[16].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[16].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[16].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6121" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[11].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[11].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[11].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[11].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[11].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[11].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[11].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6122" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[12].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[12].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[12].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[12].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[12].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[12].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[12].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6123" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[13].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[13].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[13].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[13].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[13].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[13].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[13].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6131" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[8].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[8].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[8].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[8].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[8].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[8].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[8].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6134" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[10].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[10].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[10].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[10].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[10].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[10].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[10].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6141" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[6].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[6].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[6].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[6].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[6].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[6].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[6].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6142" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[7].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[7].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[7].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[7].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[7].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[7].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[7].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6151" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[3].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[3].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[3].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[3].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[3].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[3].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[3].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6154" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[5].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[5].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[5].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[5].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[5].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[5].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[5].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6161" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[0].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[0].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[0].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[0].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[0].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[0].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[0].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6162" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[1].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[1].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[1].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[1].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[1].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[1].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[1].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6164" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[0].data[2].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[0].data[2].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[2].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[2].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[2].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[2].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[0].data[2].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mastery1">
+                                    <div class="mastery-header">Cunning - {{ details.masteries.highestWinPercent.masteries[1].total }}</div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6311"
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[14].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[14].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[14].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[14].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[14].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[14].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[14].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6312" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[16].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[16].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[16].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[16].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[16].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[16].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[16].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6321" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[11].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[11].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[11].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[11].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[11].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[11].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[11].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6322" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[12].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[12].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[12].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[12].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[12].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[12].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[12].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6323" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[13].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[13].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[13].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[13].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[13].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[13].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[13].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6331" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[8].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[8].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[8].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[8].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[8].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[8].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[8].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6332" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[10].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[10].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[10].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[10].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[10].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[10].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[10].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6342" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[6].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[6].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[6].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[6].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[6].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[6].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[6].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6343" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[7].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[7].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[7].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[7].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[7].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[7].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[7].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6351" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[3].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[3].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[3].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[3].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[3].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[3].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[3].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6352" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[5].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[5].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[5].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[5].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[5].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[5].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[5].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6361" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[0].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[0].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[0].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[0].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[0].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[0].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[0].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6362" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[1].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[1].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[1].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[1].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[1].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[1].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[1].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6363" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[1].data[2].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[1].data[2].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[2].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[2].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[2].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[2].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[1].data[2].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mastery2">
+                                    <div class="mastery-header">Resolve - {{ details.masteries.highestWinPercent.masteries[2].total }}</div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6211"
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[13].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[13].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[13].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[13].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[13].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[13].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[13].points > 4" class="point"></div>  
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6212" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[15].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[15].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[15].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[15].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[15].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[15].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[15].points > 4" class="point"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6221" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[11].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[11].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[11].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[11].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[11].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[11].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[11].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6223" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[12].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[12].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[12].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[12].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[12].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[12].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[12].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6231" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[8].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[8].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[8].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[8].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[8].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[8].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[8].points > 4" class="point"></div>
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6232" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[10].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[10].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[10].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[10].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[10].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[10].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[10].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6241" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[6].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[6].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[6].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[6].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[6].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[6].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[6].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6242" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[7].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[7].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[7].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[7].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[7].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[7].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[7].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6251" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[3].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[3].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[3].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[3].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[3].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[3].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[3].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-spacer"></div>
+                                        <div class="mastery-icon mastery-6252" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[5].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[5].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[5].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[5].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[5].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[5].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[5].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mastery-row">
+                                        <div class="mastery-icon mastery-6261" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[0].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[0].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[0].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[0].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[0].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[0].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[0].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6262" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[1].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[1].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[1].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[1].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[1].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[1].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[1].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                        <div class="mastery-icon mastery-6263" 
+                                             ng-class="{'mastery-active': details.masteries.highestWinPercent.masteries[2].data[2].points !== 0}">
+                                            <div ng-if="details.masteries.highestWinPercent.masteries[2].data[2].points" class="points">
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[2].points > 0" class="point"></div>
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[2].points > 1" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[2].points > 2" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[2].points > 3" class="point"></div> 
+                                                <div ng-if="details.masteries.highestWinPercent.masteries[2].data[2].points > 4" class="point"></div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                    <p>
+                                        <strong>{{ details.masteries.highestWinPercent.games}}</strong> Games | 
+                                        <strong>{{ details.runes.highestWinPercent.winPercent }}%</strong> Win Rate
+                                    </p>
+                            </div>
+                        </div>
                     </md-content>
                 </md-tab>
                 <md-tab label="Runes">
