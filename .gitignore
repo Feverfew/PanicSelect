@@ -95,3 +95,5 @@ env/
 /PanicSelect/app/static/css/boostrap.min.css
 /PanicSelect/.vs/config
 /nbproject/private/
+/PanicSelect/.vs
+/PanicSelect/PanicSelect1.pyproj
