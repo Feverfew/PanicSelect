@@ -61,9 +61,6 @@
                     </md-not-found>
                 </md-autocomplete>
             <bind-expression name="matchup" expression="matchup" ng-model="matchup" /> 
-            <div  layout="row" layout-sm="column" layout-align="space-around">
-                <md-progress-circular ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
-            </div>
             <md-button class="md-raised md-primary" ng-disabled="championForm.$invalid" ng-click="searchChampions()">Search</md-button>
 
         </form>
@@ -75,8 +72,8 @@
         <md-list-item ng-repeat="champ in champions" class="secondary-button-padding">
             <img alt="{{ champ.name }}" ng-src="{{ champ.img_url }}" class="md-avatar" />
             <p><strong>{{ champ.name }}</strong> <small>Rating: {{champ.rating}}</small></p>
-            <md-button hide-xs class="md-secondary" ng-click="showChampionDetailsDialog(champ, $event)">Show Details</md-button>
-            <md-button hide show-xs class="md-secondary md-icon-button" ng-click="showChampionDetailsDialog(champ, $event)">
+            <md-button aria-label="Show Details" hide-xs class="md-secondary" ng-click="showChampionDetailsDialog(champ, $event)">Show Details</md-button>
+            <md-button aria-label="Show Details" hide show-xs class="md-secondary md-icon-button" ng-click="showChampionDetailsDialog(champ, $event)">
                 <md-icon md-svg-icon="static/img/svg/ic_expand_more_black_24px.svg"></md-icon>
             </md-button>
             <md-divider ng-if="!$last"></md-divider>

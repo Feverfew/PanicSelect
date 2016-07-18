@@ -67,9 +67,9 @@ angular.module('PanicSelect')
     }]);
 
 angular.module('PanicSelect')
-    .controller('ChampionOverviewController',['$scope', 'Champion',
+    .controller('ChampionOverviewController',['$scope', '$rootScope', 'Champion',
     'ChampionDetail', '$mdDialog', '$mdMedia', '$q', '$timeout', 
-    '$mdToast', function ($scope, Champion, ChampionDetail, $mdDialog, $mdMedia,
+    '$mdToast', function ($scope, $rootScope, Champion, ChampionDetail, $mdDialog, $mdMedia,
      $q, $timeout, $mdToast) {
         var self = this;
         self.simulateQuery = false;
@@ -116,9 +116,9 @@ angular.module('PanicSelect')
         }
         $scope.champions = null;
         $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-        $scope.isLoading = false;
+        $rootScope.isLoading = false;
         $scope.searchChampions = function () {
-            $scope.isLoading = true;
+            $rootScope.isLoading = true;
             var matchup;
             if ($scope.matchup != null){
                 matchup = $scope.matchup.value.replace(/ /g, '');
@@ -127,12 +127,12 @@ angular.module('PanicSelect')
             
             var query = Champion.query({ summoner: $scope.summoner, region: $scope.region, role: $scope.role, matchup: matchup}, 
                 function (champions) {
-                    $scope.isLoading = false;
+                    $rootScope.isLoading = false;
                     $scope.errorsExist = false;
                     $scope.champions = champions.champions;
                 }, function (champions) {
                     if (champions.status != 200) {
-                        $scope.isLoading = false;
+                        $rootScope.isLoading = false;
                         $scope.errorsExist = true;
                         $scope.champions = null;
                         $scope.errorMessages = champions.data.message;
@@ -142,7 +142,13 @@ angular.module('PanicSelect')
             $scope.$apply;
         }
         $scope.showChampionDetailsDialog = function (champ, ev) {
+            $rootScope.isLoading = true;
             $scope.champ = champ;
+            $scope.$apply;
+
+            var details = ChampionDetail.get({ champion: champ.key, role: $scope.role }, function (details) {
+                $scope.details = details;
+            });
             $mdDialog.show({
                 controller: 'ChampionDetailController',
                 templateUrl: 'static/partials/champion-detail.html',
@@ -151,11 +157,10 @@ angular.module('PanicSelect')
                 preserveScope: true,
                 targetEvent: ev,
                 clickOutsideToClose: true
-                
-            }); 
-            var details = ChampionDetail.get({ champion: champ.key, role: $scope.role }, function (details) {
-                $scope.details = details;
-                console.log(details.key);
+
             });
+            $rootScope.isLoading = false;
+            $scope.$apply;
+
         };
     }]);

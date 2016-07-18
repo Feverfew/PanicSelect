@@ -1,9 +1,15 @@
+.main-nav-toolbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
 .container {
     margin-right:auto;
     margin-left:auto;
     padding-left:15px;
-    padding-right:15px
-
+    padding-right:15px;
+	margin-top: 60px;
 }
 @media (min-width:768px) {
     .container {
