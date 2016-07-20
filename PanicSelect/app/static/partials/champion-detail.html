@@ -2,7 +2,7 @@
     <form>
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>{{ details.key }} Details</h2>
+                <h2>{{ details.name }} Details</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancel()">
                     <ng-md-icon icon="close" style="fill: white" ng-attr-style="fill: white" aria-label="Close dialog"></ng-md-icon>
@@ -10,12 +10,45 @@
             </div>
         </md-toolbar>
         <md-dialog-content>
-            <md-tabs md-dynamic-height md-border-bottom>
-                <md-tab label="Winrates">
+             <div ng-show="errorsExist" class="alert alert-danger">
+                <p ng-repeat="message in errorMessages"><strong>Error: </strong>{{ message }}</p>
+            </div>
+            <md-tabs md-dynamic-height md-border-bottom ng-hide="errorsExist">
+                <md-tab label="Overview">
                     <md-content class="md-padding">
-                        <p>Overall Winrate <strong>{{ details.key }}</strong></p>
-                        <p>Personal Winrate <strong>{{ champ.personal_win_percent }}</strong> Personal Games Analysed: <strong>{{ champ.personal_games }}</strong></p>
-                        <p>Overall Winrate <strong>{{ champ.matchup_win_percent }}</strong>Matchup Games Analysed: {{ champ.matchup_games }}</p>
+                        <md-card>
+                            <md-card-title>
+                              <md-card-title-text>
+                                <span class="md-headline">{{ details.name }}</span>
+                                <span class="md-subhead">{{ details.title }}</span>
+                              </md-card-title-text>
+                              <md-card-title-media>
+                                <div class="md-media-sm card-media">
+                                    <img alt="{{ champ.name }}" ng-src="{{ champ.img_url }}" class="md-avatar" />
+                                </div>
+                              </md-card-title-media>
+                            </md-card-title>
+                      </md-card>
+                        <md-subheader>Winrates</md-subheader>
+                        <md-divider></md-divider>
+                        <md-list>
+                            <md-list-item layout-xs="column">
+                                <p>Overall Winrate: {{ champ.overall_win_percent }}%</p>
+                            </md-list-item>
+                            <md-list-item layout-xs="column">
+                                <p>Personal Winrate: {{ champ.personal_win_percent }}%</p>
+                                <p>Personal Games Analysed: {{ champ.personal_games }}</p>
+                            </md-list-item>
+                            <md-list-item ng-if="champ.matchup_games" layout-xs="column">
+                                <p>Matchup Winrate: {{ champ.matchup_win_percent }}%</p>
+                                <p>Matchup Games Analysed: {{ champ.matchup_games }}</p>
+                            </md-list-item>
+                        </md-list>
+                        <md-subheader>Ally Tips</md-subheader>
+                        <md-divider></md-divider>
+                            <ul ng-repeat="tip in details.allyTips">
+                                <li>{{ tip}}</li>
+                            </ul>
                     </md-content>
                 </md-tab>
                 <md-tab label="Item Build">

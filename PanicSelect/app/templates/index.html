@@ -18,7 +18,7 @@
 </head>
 <body ng-cloak>
     <div ng-controller="NavController">
-        <md-toolbar class="main-nav-toolbar">
+        <md-toolbar>
             <div class="md-toolbar-tools">
                 <a href="/">
                     <h2 class="md-title">
@@ -26,7 +26,6 @@
                     </h2>
                 </a>
                 <span flex></span>
-                <span flex><md-progress-circular class="md-accent" ng-show="isLoading" md-mode="indeterminate"></md-progress-circular></span>
                 <md-button hide-xs aria-label="About" ng-href="/about">About</md-button>
                 <md-button hide-xs aria-label="Donate" ng-href="/donate">Donate</md-button>
                 <ng-md-icon hide-gt-xs icon="menu" style="fill:white" ng-click="open()"></ng-md-icon>

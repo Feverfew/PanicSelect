@@ -61,6 +61,9 @@
                     </md-not-found>
                 </md-autocomplete>
             <bind-expression name="matchup" expression="matchup" ng-model="matchup" /> 
+            <div layout="row" layout-align="space-around">
+                <md-progress-circular class="md-accent" ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
+            </div>
             <md-button class="md-raised md-primary" ng-disabled="championForm.$invalid" ng-click="searchChampions()">Search</md-button>
 
         </form>

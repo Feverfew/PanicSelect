@@ -172,11 +172,9 @@ class ChampionPickGenerator(object):
         t1.join()
         t2.join()
         t3.join()
+        self.champions[:] = [champ for champ in self.champions if champ.name != self.matchup] 
         for champ in self.champions:
-            if champ.key == self.matchup:
-                self.champions.remove(champ)
-            else:
-                champ.calculate_rating()
+            champ.calculate_rating()
         self.order_champions_by_rating()
             
 
@@ -292,6 +290,7 @@ class ChampionDetailGenerator(object):
                     data["runes"]["mostGames"]["runes"][rune_number]["id"] = riot_rune.image.link
         return data
     
+    
     def get_spell_image_link(self, data):
         """Finds the url to the image of a spell
         :param data: details of a champion in a given role
@@ -301,6 +300,9 @@ class ChampionDetailGenerator(object):
         champions_list = riotapi.get_champions()
         for champion in champions_list:
             if self.champion.upper() == champion.key.upper():
+                data['title'] = champion.title
+                data['allyTips'] = champion.ally_tips
+                data['name'] = champion.name
                 for counter, spell in enumerate(champion.spells):
                     data["skills"]["skillInfo"][counter]["image"] = spell.image.link
                 return data
