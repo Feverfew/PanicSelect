@@ -87,7 +87,7 @@ class ChampionPickGenerator(object):
                 data = py_gg.champion.matchup(self.matchup)
                 role_found = False
                 for matchup_list in data:
-                    if matchup_list['role'] == self.role:
+                    if matchup_list['role'].upper() == self.role.upper():
                         role_found = True
                         data = matchup_list['matchups']
                 if role_found:
@@ -172,7 +172,8 @@ class ChampionPickGenerator(object):
         t1.join()
         t2.join()
         t3.join()
-        self.champions[:] = [champ for champ in self.champions if champ.name != self.matchup] 
+        if self.matchup:
+            self.champions[:] = [champ for champ in self.champions if not champ.key.upper() == self.matchup.upper()] 
         for champ in self.champions:
             champ.calculate_rating()
         self.order_champions_by_rating()

@@ -132,7 +132,7 @@ angular.module('PanicSelect')
                     $scope.champions = champions.champions;
                 }, function (champions) {
                     if (champions.status != 200) {
-                        $rootScope.isLoading = false;
+                        $scope.isLoading = false;
                         $scope.errorsExist = true;
                         $scope.champions = null;
                         $scope.errorMessages = champions.data.message;
