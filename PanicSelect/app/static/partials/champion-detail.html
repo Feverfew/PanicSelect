@@ -28,7 +28,19 @@
                                 </div>
                               </md-card-title-media>
                             </md-card-title>
+                            <md-card-title>
+                              <md-card-title-text>
+                                <span class="md-headline">Mastery Level: {{ champ.mastery_level }}</span>
+                                <span class="md-subhead">{{ champ.mastery_points}} points</span>
+                              </md-card-title-text>
+                              <md-card-title-media>
+                                <div class="md-media-sm card-media" ng-if="champ.mastery_level > 3">
+                                    <div alt="Mastery Level {{ champ.mastery_level }}" class="md-avatar champion-mastery mastery-lvl-{{ champ.mastery_level }}"></div>
+                                </div>
+                              </md-card-title-media>
+                            </md-card-title>
                       </md-card>
+
                         <md-subheader>Winrates</md-subheader>
                         <md-divider></md-divider>
                         <md-list>

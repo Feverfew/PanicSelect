@@ -310,3 +310,26 @@ md-list-item {
 .mastery-6363 {
 	background-position:-336px -96px
 }
+.champion-mastery {
+	background-image: url(http://i.imgur.com/sVk9hc3.png);
+}
+.mastery-lvl-4{
+	background-position: -17px -25px;
+	width: 80px;
+	height: 80px;
+}
+.mastery-lvl-5{
+	background-position: -105px -25px;
+	width: 80px;
+	height: 80px;
+}
+.mastery-lvl-6{
+	background-position: -188px -25px;
+	width: 80px;
+	height: 86px;
+}
+.mastery-lvl-7{
+	background-position: -269px -25px;
+	width: 80px;
+	height:	93px;
+}

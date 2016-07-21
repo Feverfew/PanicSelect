@@ -111,7 +111,8 @@ class ChampionPickGenerator(object):
                         return {
                             'level': mastery.level,
                             'points_since_last_level': mastery.points_since_last_level,
-                            'last_played': mastery.last_played
+                            'last_played': mastery.last_played,
+                            'points': mastery.points
                             }
                 except AttributeError:
                     pass #possible riotapi bug
@@ -123,6 +124,7 @@ class ChampionPickGenerator(object):
                     champion.mastery_level = personal_masteries['level']
                     champion.mastery_points_since_last_level = personal_masteries['points_since_last_level']
                     champion.last_played = personal_masteries['last_played']
+                    champion.mastery_points = personal_masteries['points']
         except APIError:
             self.api_errors.append("Riot API error occured")
         
@@ -203,6 +205,7 @@ class ChampionPick(object):
         self.matchup_games= 0
         self.id = id
         self.mastery_level = 0
+        self.mastery_points = 0
         self.mastery_points_since_last_level = 0
         self.last_played = None
         self.lol_version = lol_version
@@ -222,6 +225,7 @@ class ChampionPick(object):
             'matchup_win_percent': self.matchup_win_percent,
             'matchup_games': self.matchup_games,
             'mastery_level': self.mastery_level,
+            'mastery_points': self.mastery_points,
             'mastery_points_since_last_level': self.mastery_points_since_last_level,
             'last_played': self.last_played
         }
