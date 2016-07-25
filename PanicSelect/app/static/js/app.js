@@ -97,7 +97,7 @@ angular.module('PanicSelect')
          * Build `states` list of key/value pairs
          */
         function loadAll() {
-            var champion_list = "Aatrox, Ahri, Akali, Alistar, Amumu, Anivia, Annie, Ashe, Azir, Bard, Blitzcrank, Brand, Braum, Caitlyn, Cassiopeia, Cho'Gath, Corki, Darius, diana, Dr. Mundo, Draven, Ekko, Elise, Evelynn, Ezreal, Fiddlesticks, Fiora, Fizz, Galio, Gangplank, Garen, Gnar, Gragas, Graves, Hecarim, Heimerdinger, Illaoi, Irelia, Janna Jarvan IV, Jax, Jayce, Jinx, Kalista, Karma, Karthus, Kassadin, Katarina, Kayle, Kennen, Kha'Zix, Kindred, Kog'Maw, LeBlanc, Lee Sin, Leona, Lissandra, Lucian, Lulu, Lux, Malphite, Malzahar, Maokai, Master Yi, Miss Fortune, Mordekaiser, Morgana, Nami, Nasus, Nautilus, Nidalee, Nocturne, Nunu, Olaf, Orianna, Pantheon, Poppy, Quinn, Rammus, Rek'Sai, Renekton, Rengar, Riven, Rumble, Ryze, Sejuani, Shaco, Shen, Shyvana, Singed, Sion, Sivir, Skarner, Sona, Soraka, Swain, Syndra, Tahm Kench, Taliyah, Talon, Taric, Teemo, Thresh, Tristana, Trundle, Tryndamere, Twisted Fate, Twitch, Udyr, Urgot, Varus, Vayne, Veigar, Vel'Koz, Vi, Viktor, Vladimir, Volibear, Warwick, Wukong, Xerath, Xin Zhao, Yasuo, Yorick, Zac, Zed, Ziggs, Zilean, Zyra";
+            var champion_list = "Aatrox, Ahri, Akali, Alistar, Amumu, Anivia, Annie, Ashe, Aurelion Sol, Azir, Bard, Blitzcrank, Brand, Braum, Caitlyn, Cassiopeia, Cho'Gath, Corki, Darius, diana, Dr. Mundo, Draven, Ekko, Elise, Evelynn, Ezreal, Fiddlesticks, Fiora, Fizz, Galio, Gangplank, Garen, Gnar, Gragas, Graves, Hecarim, Heimerdinger, Illaoi, Irelia, Janna Jarvan IV, Jax, Jayce, Jhin, Jinx, Kalista, Karma, Karthus, Kassadin, Katarina, Kayle, Kennen, Kha'Zix, Kindred, Kog'Maw, LeBlanc, Lee Sin, Leona, Lissandra, Lucian, Lulu, Lux, Malphite, Malzahar, Maokai, Master Yi, Miss Fortune, Mordekaiser, Morgana, Nami, Nasus, Nautilus, Nidalee, Nocturne, Nunu, Olaf, Orianna, Pantheon, Poppy, Quinn, Rammus, Rek'Sai, Renekton, Rengar, Riven, Rumble, Ryze, Sejuani, Shaco, Shen, Shyvana, Singed, Sion, Sivir, Skarner, Sona, Soraka, Swain, Syndra, Tahm Kench, Taliyah, Talon, Taric, Teemo, Thresh, Tristana, Trundle, Tryndamere, Twisted Fate, Twitch, Udyr, Urgot, Varus, Vayne, Veigar, Vel'Koz, Vi, Viktor, Vladimir, Volibear, Warwick, Wukong, Xerath, Xin Zhao, Yasuo, Yorick, Zac, Zed, Ziggs, Zilean, Zyra";
             return champion_list.split(/, +/g).map(function (champion_list) {
                 return {
                     value: champion_list.toLowerCase(),
@@ -142,25 +142,26 @@ angular.module('PanicSelect')
             $scope.$apply;
         }
         $scope.showChampionDetailsDialog = function (champ, ev) {
-            $scope.champ = champ
+            $scope.errorsExist = false;
+            $scope.champ = champ;
             var details = ChampionDetail.get({ champion: champ.key, role: $scope.role }, function (details) {
-                $scope.details = details
-                console.log(details.key)
+                $scope.details = details;
+                $scope.errorsExist = false;
+            }, function (details) {
+                $scope.details = null;
+                $scope.errorsExist = true;
+                $scope.errorMessages =  champions.data.message
             });
             $mdDialog.show({
-                locals: {
-                    champ: champ,
-                    details: details
-                },
                 controller: 'ChampionDetailController',
-                controllerAs: 'detCtrl',
                 templateUrl: 'static/partials/champion-detail.html',
                 parent: angular.element(document.body),
                 scope: $scope,
                 preserveScope: true,
                 targetEvent: ev,
                 clickOutsideToClose: true
-                
-            })
+
+            });
+
         };
     }]);

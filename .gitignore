@@ -97,3 +97,5 @@ env/
 /nbproject/private/
 /PanicSelect/.vs
 /PanicSelect/PanicSelect1.pyproj
+*.sln
+/PanicSelect/app/static/img/favicon.png

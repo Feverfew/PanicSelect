@@ -4,8 +4,6 @@ from py_gg import InvalidAPIKeyError
 import py_gg
 import threading
 
-LOL_VERSION = '6.13.1'
-
 class ChampionPickGenerator(object):
     """This class collects all API data needed to generate the list of best champs"""
 
@@ -33,6 +31,11 @@ class ChampionPickGenerator(object):
         except APIError: 
             self.api_errors.append("Initialisation error")
         try:
+            versions = riotapi.get_versions()
+            self.lol_version = versions[0]
+        except APIError:
+            self.api_errors.append("Riot API error occured")
+        try:
             self.summoner_info = riotapi.get_summoner_by_name(self.summoner_name)
         except APIError:
             self.api_errors.append("Summoner not found")
@@ -55,7 +58,7 @@ class ChampionPickGenerator(object):
             data = py_gg.stats.role(self.role, None, None, p={'limit':1000})
             for champ in data['data']:
                 id = self.champion_mapping[champ['name']]
-                champ_obj = ChampionPick(champ['name'], champ['key'], id, champ['general']['winPercent'])
+                champ_obj = ChampionPick(champ['name'], champ['key'], id,  self.lol_version, champ['general']['winPercent'])
                 self.champions.append(champ_obj)
         except:
             self.api_errors.append("Champion.gg API failed to respond")
@@ -84,7 +87,7 @@ class ChampionPickGenerator(object):
                 data = py_gg.champion.matchup(self.matchup)
                 role_found = False
                 for matchup_list in data:
-                    if matchup_list['role'] == self.role:
+                    if matchup_list['role'].upper() == self.role.upper():
                         role_found = True
                         data = matchup_list['matchups']
                 if role_found:
@@ -108,7 +111,8 @@ class ChampionPickGenerator(object):
                         return {
                             'level': mastery.level,
                             'points_since_last_level': mastery.points_since_last_level,
-                            'last_played': mastery.last_played
+                            'last_played': mastery.last_played,
+                            'points': mastery.points
                             }
                 except AttributeError:
                     pass #possible riotapi bug
@@ -120,6 +124,7 @@ class ChampionPickGenerator(object):
                     champion.mastery_level = personal_masteries['level']
                     champion.mastery_points_since_last_level = personal_masteries['points_since_last_level']
                     champion.last_played = personal_masteries['last_played']
+                    champion.mastery_points = personal_masteries['points']
         except APIError:
             self.api_errors.append("Riot API error occured")
         
@@ -169,11 +174,10 @@ class ChampionPickGenerator(object):
         t1.join()
         t2.join()
         t3.join()
+        if self.matchup:
+            self.champions[:] = [champ for champ in self.champions if not champ.key.upper() == self.matchup.upper()] 
         for champ in self.champions:
-            if champ.key == self.matchup:
-                self.champions.remove(champ)
-            else:
-                champ.calculate_rating()
+            champ.calculate_rating()
         self.order_champions_by_rating()
             
 
@@ -181,7 +185,7 @@ class ChampionPickGenerator(object):
 class ChampionPick(object):
     """Class for champion data with which rating is calculated."""
 
-    def __init__(self, name, key, id, overall_win_percent=0):
+    def __init__(self, name, key, id, lol_version, overall_win_percent=0):
         """"
         :param name: Name of champion
         :type name: str
@@ -201,9 +205,11 @@ class ChampionPick(object):
         self.matchup_games= 0
         self.id = id
         self.mastery_level = 0
+        self.mastery_points = 0
         self.mastery_points_since_last_level = 0
         self.last_played = None
-        self._BASE_IMG_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/champion/'.format(LOL_VERSION)
+        self.lol_version = lol_version
+        self._BASE_IMG_URL = 'http://ddragon.leagueoflegends.com/cdn/{}/img/champion/'.format(self.lol_version)
         self.img_url = '{}{}.png'.format(self._BASE_IMG_URL, self.key)
         self.rating = 0
 
@@ -219,6 +225,7 @@ class ChampionPick(object):
             'matchup_win_percent': self.matchup_win_percent,
             'matchup_games': self.matchup_games,
             'mastery_level': self.mastery_level,
+            'mastery_points': self.mastery_points,
             'mastery_points_since_last_level': self.mastery_points_since_last_level,
             'last_played': self.last_played
         }
@@ -240,11 +247,15 @@ class ChampionPick(object):
             matchup = self.matchup_win_percent * (1 + self.matchup_games/50000)
         elif self.matchup_games > 30:
             matchup = self.matchup_win_percent * (0.7 + 3 * self.matchup_games/500)
-        mastery_multiplier = 1 + (self.mastery_level**2 / 100)
-        if self.mastery_level is 5:
+        if self.mastery_level >= 5:
+            mastery_multiplier = 1.25
             mastery_multiplier = mastery_multiplier + self.mastery_points_since_last_level/1000000
-        elif self.mastery_level is 0:
-            mastery_multiplier = 0.75
+        elif self.mastery_level == 0:
+            mastery_multiplier = 0.6
+        elif self.mastery_level == 1:
+            mastery_multiplier = 0.8
+        else: 
+            mastery_multipler = 1 + (self.mastery_level**2)
         self.rating = int(base_rating * (self.overall_win_percent/50) * (personal/50) * (matchup/50) * mastery_multiplier)
 
 class ChampionDetailGenerator(object):
@@ -255,18 +266,118 @@ class ChampionDetailGenerator(object):
         self.role = role
         self.api_errors = []
         try:
+            riotapi.set_region("EUW") # Region doesn't matter in this case
+            riotapi.set_api_key('3bdf3fcc-39db-4f5a-8a1f-477fb97f7094')
+        except APIError: 
+            self.api_errors.append("Initialisation error")
+        try:
+            versions = riotapi.get_versions()
+            self.lol_version = versions[0]
+        except APIError:
+            self.api_errors.append("Riot API error occured")
+        try:
             py_gg.init('ae89f8f81c1334bf7174a6622d47aa2c')
         except InvalidAPIKeyError:
             self.api_errors.append("Invalid API Key error")
         except:
             self.api_errors.append("Champion.gg API failed to respond")
+    
+    def replace_rune_id(self, data):
+        """replace the ids with the url to the cdn and add version
+        :param data: details of a champion in a given role
+        :param type: dict
+        :rtype: dict
+        """
+        runes_list = riotapi.get_runes()
+        for rune_number, data_rune in enumerate(data["runes"]["highestWinPercent"]["runes"]):
+            for riot_rune in runes_list:
+                if riot_rune.id == data_rune["id"]:
+                    data["runes"]["highestWinPercent"]["runes"][rune_number]["id"] = riot_rune.image.link
+        for rune_number, data_rune in enumerate(data["runes"]["mostGames"]["runes"]):
+            for riot_rune in runes_list:
+                if riot_rune.id == data_rune["id"]:
+                    data["runes"]["mostGames"]["runes"][rune_number]["id"] = riot_rune.image.link
+        return data
+    
+    
+    def get_spell_image_link(self, data):
+        """Finds the url to the image of a spell
+        :param data: details of a champion in a given role
+        :param type: dict
+        :rtype: dict
+        """
+        champions_list = riotapi.get_champions()
+        for champion in champions_list:
+            if self.champion.upper() == champion.key.upper():
+                data['title'] = champion.title
+                data['allyTips'] = champion.ally_tips
+                data['name'] = champion.name
+                for counter, spell in enumerate(champion.spells):
+                    data["skills"]["skillInfo"][counter]["image"] = spell.image.link
+                return data
+        self.api_errors("Riot API error occured")
+        return data
+        
+    
+    def replace_summoner_id(self, data):
+        """Replace names of summoner abilities for the url to the cdn
+        :param data: details of a champion in a given role
+        :param type: dict
+        :rtype: dict
+        """
+        if data["summoners"]["highestWinPercent"]["summoner1"]["name"] == "Ignite":
+            data["summoners"]["highestWinPercent"]["summoner1"]["other"] = "Dot"
+        elif data["summoners"]["highestWinPercent"]["summoner1"]["name"] == "Ghost":
+            data["summoners"]["highestWinPercent"]["summoner1"]["other"] = "Haste"
+        elif data["summoners"]["highestWinPercent"]["summoner1"]["name"] == "Cleanse":
+            data["summoners"]["highestWinPercent"]["summoner1"]["other"] = "Boost"
+        else:
+            data["summoners"]["highestWinPercent"]["summoner1"]["other"] = data["summoners"]["highestWinPercent"]["summoner1"]["name"]
+            
+        if data["summoners"]["highestWinPercent"]["summoner2"]["name"] == "Ignite":
+            data["summoners"]["highestWinPercent"]["summoner2"]["other"] = "Dot"
+        elif data["summoners"]["highestWinPercent"]["summoner2"]["name"] == "Ghost":
+            data["summoners"]["highestWinPercent"]["summoner2"]["other"] = "Haste"
+        elif data["summoners"]["highestWinPercent"]["summoner2"]["name"] == "Cleanse":
+            data["summoners"]["highestWinPercent"]["summoner2"]["other"] = "Boost"
+        else:
+            data["summoners"]["highestWinPercent"]["summoner2"]["other"] = data["summoners"]["highestWinPercent"]["summoner2"]["name"]
+            
+        if data["summoners"]["mostGames"]["summoner1"]["name"] == "Ignite":
+            data["summoners"]["mostGames"]["summoner1"]["other"] = "Dot"
+        elif data["summoners"]["mostGames"]["summoner1"]["name"] == "Ghost":
+            data["summoners"]["mostGames"]["summoner1"]["other"] = "Haste"
+        elif data["summoners"]["mostGames"]["summoner1"]["name"] == "Cleanse":
+            data["summoners"]["mostGames"]["summoner1"]["other"] = "Boost"
+        else:
+            data["summoners"]["mostGames"]["summoner1"]["other"] = data["summoners"]["mostGames"]["summoner1"]["name"]
+            
+        if data["summoners"]["mostGames"]["summoner2"]["name"] == "Ignite":
+            data["summoners"]["mostGames"]["summoner2"]["other"] = "Dot"
+        elif data["summoners"]["mostGames"]["summoner2"]["name"] == "Ghost":
+            data["summoners"]["mostGames"]["summoner2"]["other"] = "Haste"
+        elif data["summoners"]["mostGames"]["summoner2"]["name"] == "Cleanse":
+            data["summoners"]["mostGames"]["summoner2"]["other"] = "Boost"
+        else:
+            data["summoners"]["mostGames"]["summoner2"]["other"] = data["summoners"]["mostGames"]["summoner2"]["name"]
+        return data
+        
 
     def get_champion_detail(self):
+        data = None
         try:
             champ_data = py_gg.champion.specific(self.champion)
             for role in champ_data:
                 if role['role'].upper() == self.role.upper():
-                    return role
+                    data = role
         except:
             self.api_errors.append("Champion.gg API failed to respond")
             return None
+        data = self.replace_rune_id(data)
+        data = self.replace_summoner_id(data)
+        data = self.get_spell_image_link(data)
+        data["version"] = self.lol_version
+        data["key"] = self.champion
+        return data
+        
+        

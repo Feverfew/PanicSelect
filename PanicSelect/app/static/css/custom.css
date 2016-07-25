@@ -1,9 +1,8 @@
-﻿.container {
+.container {
     margin-right:auto;
     margin-left:auto;
     padding-left:15px;
-    padding-right:15px
-
+    padding-right:15px;
 }
 @media (min-width:768px) {
     .container {
@@ -22,10 +21,13 @@
 
     }
 }
-.jumbotron{padding-top:30px;padding-bottom:30px;margin-bottom:30px;color:inherit;background-color:#fafafa}.jumbotron h1,.jumbotron .h1{color:inherit}.jumbotron p{margin-bottom:15px;font-size:23px;font-weight:200}.jumbotron>hr{border-top-color:#e1e1e1}.container .jumbotron,.container-fluid .jumbotron{border-radius:0;padding-left:15px;padding-right:15px}.jumbotron .container{max-width:100%}@media screen and (min-width:768px){.jumbotron{padding-top:48px;padding-bottom:48px}.container .jumbotron,.container-fluid .jumbotron{padding-left:60px;padding-right:60px}.jumbotron h1,.jumbotron .h1{font-size:68px}}
-.item { 
+.jumbotron{padding-top:30px;padding-bottom:30px;margin-bottom:30px;color:inherit;}.jumbotron h1,.jumbotron .h1{color:inherit}.jumbotron p{margin-bottom:15px;font-size:23px;font-weight:200}.jumbotron>hr{border-top-color:#e1e1e1}.container .jumbotron,.container-fluid .jumbotron{border-radius:0;padding-left:15px;padding-right:15px}.jumbotron .container{max-width:100%}@media screen and (min-width:768px){.jumbotron{padding-top:48px;padding-bottom:48px}.container .jumbotron,.container-fluid .jumbotron{padding-left:60px;padding-right:60px}.jumbotron h1,.jumbotron .h1{font-size:68px}}
+.item, .spell { 
     max-height: 36px;
     max-width: 36px;
+}
+.rune {
+    margin-right: 5px;
 }
 .list-padding {
     margin: 0 -13px;
@@ -50,4 +52,284 @@ md-list-item {
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
+}
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-color: rgba(0,0,0,0.12);
+  border-right-style: solid;
+  height: 100%;
+}
+.skill-block > div {
+    height: 36px;
+}
+.skill-selected > p{
+    border-radius: 50%;
+    background: #2d8dc3;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    height:22px;
+    width: 22px;
+    margin: 8px 2px;
+    
+    
+}
+.class-index {
+    background: rgb(255, 91, 74);
+    color: black;
+    font-weight: bold;
+    line-height: 36px;
+}
+.mastery0,.mastery1,.mastery2 {
+	display:inline-block;
+	cursor:default;
+	position:relative;
+	padding:10px;
+	background-size:120%;
+	border:1px solid #373b42;
+	margin-left:10px
+}
+.mastery0{
+	background-image:url(http://champion.gg/img/mastery0.jpg?v=5.22.3)
+}
+.mastery1 {
+	background-image:url(http://champion.gg/img/mastery1.jpg?v=5.22.3)
+}
+.mastery2 {
+	background-image:url(http://champion.gg/img/mastery2.jpg?v=5.22.3)
+}
+.mastery-header {
+	font-weight:700;
+	font-size:1.1em;
+	text-align: center;
+        color: #fff;
+}
+.mastery-row {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mastery-container {
+	border-right:none!important;
+	position:relative;
+	text-align:center
+}
+.mastery-icon {
+	margin:3px;
+	border:1px solid grey;
+	width:40px;
+	height:40px;
+	display:block;
+	background-size:initial;
+	position:relative;
+	opacity:.35;
+	float:left;
+	z-index:88
+}
+.mastery-icon .points {
+	display:block;
+	width:100%;
+	height:8px;
+	padding:0;
+	margin:0;
+	background-color:rgba(0,0,0,.83);
+	position:absolute;
+	bottom:0
+}
+.mastery-icon .point {
+	display:block;
+	position:relative;
+	background-color:#ff0;
+	width:4px;
+	height:4px;
+	margin-left:3px;
+	top:3px;
+	float:left
+}
+.mastery-spacer {
+	width:40px;
+	height:40px;
+	margin:3px;
+	position:relative;
+	display:block;
+	float:left
+}
+.mastery-active {
+	border:2px solid #000;
+	opacity:1
+}
+.mastery-icon.double-mastery-left-indent {
+	margin-left:124px
+}
+.mastery-icon.mastery-left-indent {
+	margin-left:62px
+}
+.mastery-icon.tripple-mastery-left-indent {
+	margin-left:186px
+}
+.mastery-points {
+	display:none
+}
+.mastery-selected-3 .mastery-points {
+	width:100%;
+	height:10px;
+	background-color:#000;
+	position:absolute;
+	display:block
+}
+.mastery-icon {
+	background-image:url(http://ddragon.leagueoflegends.com/cdn/6.12.1/img/sprite/gray_mastery0.png)
+}
+.mastery-active {
+	background-image:url(http://ddragon.leagueoflegends.com/cdn/6.12.1/img/sprite/mastery0.png)
+}
+.mastery-6111 {
+	background-position:0 0
+}
+.mastery-6114 {
+	background-position:-48px 0
+}
+.mastery-6121 {
+	background-position:-96px 0
+}
+.mastery-6122 {
+	background-position:-144px 0
+}
+.mastery-6123 {
+	background-position:-192px 0
+}
+.mastery-6131 {
+	background-position:-240px 0
+}
+.mastery-6134 {
+	background-position:-288px 0
+}
+.mastery-6141 {
+	background-position:-336px 0
+}
+.mastery-6142 {
+	background-position:-384px 0
+}
+.mastery-6151 {
+	background-position:-432px 0
+}
+.mastery-6154 {
+	background-position:0 -48px
+}
+.mastery-6161 {
+	background-position:-48px -48px
+}
+.mastery-6162 {
+	background-position:-96px -48px
+}
+.mastery-6164 {
+	background-position:-144px -48px
+}
+.mastery-6211 {
+	background-position:-384px -96px
+}
+.mastery-6212 {
+	background-position:-432px -96px
+}
+.mastery-6221 {
+	background-position:0 -144px
+}
+.mastery-6223 {
+	background-position:-48px -144px
+}
+.mastery-6231 {
+	background-position:-96px -144px
+}
+.mastery-6232 {
+	background-position:-144px -144px
+}
+.mastery-6241 {
+	background-position:-192px -144px
+}
+.mastery-6242 {
+	background-position:-240px -144px
+}
+.mastery-6251 {
+	background-position:-288px -144px
+}
+.mastery-6252 {
+	background-position:-336px -144px
+}
+.mastery-6261 {
+	background-position:-384px -144px
+}
+.mastery-6262 {
+	background-position:-432px -144px
+}
+.mastery-6263 {
+	background-position:0 -192px
+}
+.mastery-6311 {
+	background-position:-192px -48px
+}
+.mastery-6312 {
+	background-position:-240px -48px
+}
+.mastery-6321 {
+	background-position:-288px -48px
+}
+.mastery-6322 {
+	background-position:-336px -48px
+}
+.mastery-6323 {
+	background-position:-384px -48px
+}
+.mastery-6331 {
+	background-position:-432px -48px
+}
+.mastery-6332 {
+	background-position:0 -96px
+}
+.mastery-6342 {
+	background-position:-48px -96px
+}
+.mastery-6343 {
+	background-position:-96px -96px
+}
+.mastery-6351 {
+	background-position:-144px -96px
+}
+.mastery-6352 {
+	background-position:-192px -96px
+}
+.mastery-6361 {
+	background-position:-240px -96px
+}
+.mastery-6362 {
+	background-position:-288px -96px
+}
+.mastery-6363 {
+	background-position:-336px -96px
+}
+.champion-mastery {
+	background-image: url(http://i.imgur.com/sVk9hc3.png);
+}
+.mastery-lvl-4{
+	background-position: -17px -25px;
+	width: 80px;
+	height: 80px;
+}
+.mastery-lvl-5{
+	background-position: -105px -25px;
+	width: 80px;
+	height: 80px;
+}
+.mastery-lvl-6{
+	background-position: -188px -25px;
+	width: 80px;
+	height: 86px;
+}
+.mastery-lvl-7{
+	background-position: -269px -25px;
+	width: 80px;
+	height:	93px;
 }
