@@ -28,7 +28,7 @@ def not_found():
 @api_1_0.route('/ratings')
 def champions_rating():
     errors = []
-    regions = ['EUW','EUNE','NA','BR','OCE','LAN','LAS','TR','RU', 'JP']
+    regions = ['EUW','EUNE','NA','BR','OCE','LAN','LAS','KR','TR','RU', 'JP']
     roles = ['JUNGLE', 'TOP', 'MIDDLE', 'ADC', 'SUPPORT']
     summoner = request.args.get('summoner')
     region = request.args.get('region')
