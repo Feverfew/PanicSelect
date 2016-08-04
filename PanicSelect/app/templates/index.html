@@ -2,7 +2,8 @@
 <html lang="en" ng-app="PanicSelect">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Panic Select is designed to help you pick a champion which will give you the highest chance of winning based on real and up-to-date data." />
     <title>Panic Select</title>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.9/angular-material.min.css">
     <link rel="stylesheet" href="static/css/custom.css" />
@@ -16,6 +17,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.9/angular-material.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.1/angular-material-icons.min.js"></script> 
     <script src="static/js/app.js"></script>
+    <script type="text/javascript">
+(function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = '//api.at.getsocial.io/widget/v1/gs_async.js?id=a59e86'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
+</script>
 </head>
 <body ng-cloak>
     <div ng-controller="NavController">
@@ -60,4 +64,5 @@
     </div>
     <div layout="column" class="container" ng-view></div>
 </body>
+
 </html>

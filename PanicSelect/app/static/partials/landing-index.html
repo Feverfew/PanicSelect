@@ -2,6 +2,12 @@
     <div class="jumbotron">
         <h1>Hello, Summoners!</h1>
         <p>Panic Select is designed to help you pick a champion which will give you the highest chance of winning based on real and up-to-date data.</p>
+        <p ng-if="readMore">League of legends is a fast paced multiplayer MOBA game in which two teams of five aim to destroy the enemy nexus before their own nexus is destroyed.
+However, with over 100 champions, the game can prove challenging as there are many abilities, mechanics and situations to learn. </p>
+        <p ng-if="readMore">Panicselect is here to help, with our custom built number crunching algorithm, our very own point system which integrates not only matchup win rates, but also personal win rates, you get a website dedicated to your success. </p>
+        <p ng-if="readMore">As we know, counter picks can be unreliable when you're not sure how to play said champion, so we give you the best way of knowing who to pick against any matchup, including when you're unsure of your matchup!</p>
+        <md-button ng-if="!readMore" class="md-raised" ng-click="showMoreText()">Read More</md-button>
+        <md-button ng-if="readMore" class="md-raised" ng-click="showMoreText()">Close</md-button>
     </div>
     <md-content layout-gt-sm="column" layout-padding>
         <div ng-show="errorsExist" class="alert alert-danger">
