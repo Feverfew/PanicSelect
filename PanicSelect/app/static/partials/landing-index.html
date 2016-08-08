@@ -1,5 +1,17 @@
 <div ng-controller="ChampionOverviewController as ctrl">
     <div style="margin-top:3px;" class="getsocial gs-inline-group gs-follow"></div>
+    <div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Panicselect top -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9303051865263171"
+             data-ad-slot="3049570497"
+             data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
     <div class="jumbotron">
         <h1>Hello, Summoners!</h1>
         <p>Panic Select is designed to help you pick a champion which will give you the highest chance of winning based on real and up-to-date data.</p>
@@ -9,6 +21,18 @@ However, with over 100 champions, the game can prove challenging as there are ma
         <p ng-if="readMore">As we know, counter picks can be unreliable when you're not sure how to play said champion, so we give you the best way of knowing who to pick against any matchup, including when you're unsure of your matchup!</p>
         <md-button ng-if="!readMore" class="md-raised" ng-click="showMoreText()">Read More</md-button>
         <md-button ng-if="readMore" class="md-raised" ng-click="showMoreText()">Close</md-button>
+    </div>
+    <div>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Panicselect middle -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9303051865263171"
+             data-ad-slot="4386702897"
+             data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
     <md-content layout-gt-sm="column" layout-padding>
         <div ng-show="errorsExist" class="alert alert-danger">
@@ -68,6 +92,18 @@ However, with over 100 champions, the game can prove challenging as there are ma
                     </md-not-found>
                 </md-autocomplete>
             <bind-expression name="matchup" expression="matchup" ng-model="matchup" /> 
+            <div>
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Panicselect bottom -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9303051865263171"
+                     data-ad-slot="5863436095"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
             <div layout="row" layout-align="space-around">
                 <md-progress-circular class="md-accent" ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
             </div>
@@ -75,7 +111,6 @@ However, with over 100 champions, the game can prove challenging as there are ma
 
         </form>
     </md-content>
-    
     <md-list>
         <md-subheader ng-if="champions" class="md-no-sticky">Champions for you to pick ordered by rating:</md-subheader>
         <md-divider ng-if="champions"></md-divider>
