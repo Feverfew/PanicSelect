@@ -27,7 +27,7 @@ class ChampionPickGenerator(object):
         self.api_errors = []
         try:
             riotapi.set_region(region)
-            riotapi.set_api_key('3bdf3fcc-39db-4f5a-8a1f-477fb97f7094')
+            riotapi.set_api_key('RGAPI-6E92FAE2-079F-4FD6-B2AA-8A0CF99B08D8')
         except APIError: 
             self.api_errors.append("Initialisation error")
         try:
@@ -267,7 +267,7 @@ class ChampionDetailGenerator(object):
         self.api_errors = []
         try:
             riotapi.set_region("EUW") # Region doesn't matter in this case
-            riotapi.set_api_key('3bdf3fcc-39db-4f5a-8a1f-477fb97f7094')
+            riotapi.set_api_key('RGAPI-6E92FAE2-079F-4FD6-B2AA-8A0CF99B08D8')
         except APIError: 
             self.api_errors.append("Initialisation error")
         try:
