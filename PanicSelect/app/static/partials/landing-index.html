@@ -10,18 +10,6 @@ However, with over 100 champions, the game can prove challenging as there are ma
         <md-button ng-if="!readMore" class="md-raised" ng-click="showMoreText()">Read More</md-button>
         <md-button ng-if="readMore" class="md-raised" ng-click="showMoreText()">Close</md-button>
     </div>
-    <div>
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Panicselect middle -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9303051865263171"
-             data-ad-slot="4386702897"
-             data-ad-format="auto"></ins>
-        <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
     <md-content layout-gt-sm="column" layout-padding>
         <div ng-show="errorsExist" class="alert alert-danger">
             <p ng-repeat="message in errorMessages"><strong>Error: </strong>{{ message }}</p>
@@ -80,18 +68,6 @@ However, with over 100 champions, the game can prove challenging as there are ma
                     </md-not-found>
                 </md-autocomplete>
             <bind-expression name="matchup" expression="matchup" ng-model="matchup" /> 
-            <div>
-                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Panicselect bottom -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-9303051865263171"
-                     data-ad-slot="5863436095"
-                     data-ad-format="auto"></ins>
-                <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
             <div layout="row" layout-align="space-around">
                 <md-progress-circular class="md-accent" ng-show="isLoading" md-mode="indeterminate"></md-progress-circular>
             </div>
