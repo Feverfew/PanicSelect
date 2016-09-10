@@ -249,14 +249,14 @@ class ChampionPick(object):
         elif self.personal_games > 10:
             personal = self.personal_win_percent * (0.8 + self.personal_games/200)
         if self.matchup_games > 200:
-            matchup = self.matchup_win_percent * 1.15
+            matchup = self.matchup_win_percent * 1.5
         elif self.matchup_games > 50:
-            matchup = self.matchup_win_percent * (1 + self.matchup_games/1333)
+            matchup = self.matchup_win_percent * (1 + self.matchup_games/4000)
         elif self.matchup_games > 30:
             matchup = self.matchup_win_percent * (0.7 + 3 * self.matchup_games/500)
         if self.mastery_level >= 5:
-            mastery_multiplier = 1.25
-            mastery_multiplier = mastery_multiplier + self.mastery_points_since_last_level/1000000
+            mastery_multiplier = 1.2
+            mastery_multiplier = mastery_multiplier + self.mastery_points_since_last_level/10000000
         elif self.mastery_level == 0:
             mastery_multiplier = 0.6
         elif self.mastery_level == 1:
