@@ -56,13 +56,10 @@ class ChampionPickGenerator(object):
     def get_champ_data_by_role(self):
         """Gets champion data by role and puts it into a list."""
         try:
-            data = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 1})
-            if len(data['data']) == 50:
-                next_page = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 2})
-                for champ in next_page['data']:
-                    id = self.champion_mapping[champ['name']]
-                    champ_obj = ChampionPick(champ['name'], champ['key'], id,  self.lol_version, champ['general']['winPercent'])
-                    self.champions.append(champ_obj)
+            data = requests.get("http://api.champion.gg/stats/role/"+self.role+"?limit=1000").json()
+            # data = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 1})
+            #if len(data['data']) == 50:
+            #    next_page = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 2})
             for champ in data['data']:
                 id = self.champion_mapping[champ['name']]
                 champ_obj = ChampionPick(champ['name'], champ['key'], id,  self.lol_version, champ['general']['winPercent'])
@@ -245,24 +242,42 @@ class ChampionPick(object):
         matchup = 45
         mastery_multiplier = 1
         if self.personal_games > 40:
-            personal = self.personal_win_percent * (1 + self.personal_games/1000)
+            if self.personal_win_percent > 50:
+                personal = self.personal_win_percent * (1 + self.personal_games/500)
+            else:
+                personal = self.personal_win_percent / (1 + self.personal_games/500)
         elif self.personal_games > 10:
-            personal = self.personal_win_percent * (0.8 + self.personal_games/200)
-        if self.matchup_games > 200:
-            matchup = self.matchup_win_percent * 1.5
+            personal = self.personal_win_percent * (0.8 + self.personal_games/50)
+        elif self.personal_games > 4:
+            personal = self.personal_win_percent * 0.8
+        if self.matchup_games > 100:
+            if self.matchup_win_percent > 50:
+                matchup = self.matchup_win_percent * 1.25
+            else:
+                matchup = self.matchup_win_percent / 1.25
         elif self.matchup_games > 50:
-            matchup = self.matchup_win_percent * (1 + self.matchup_games/4000)
+            if self.matchup_win_percent > 50:
+                matchup = self.matchup_win_percent * (1 + self.matchup_games/80)
+            else:
+                matchup = self.matchup_win_percent / (1 + self.matchup_games/80)
         elif self.matchup_games > 30:
             matchup = self.matchup_win_percent * (0.7 + 3 * self.matchup_games/500)
         if self.mastery_level >= 5:
-            mastery_multiplier = 1.2
-            mastery_multiplier = mastery_multiplier + self.mastery_points_since_last_level/10000000
+            if self.mastery_level > 5:
+                mastery_multiplier = 1.2
+            else:    
+                mastery_multiplier = 1.1
+            mastery_multiplier = mastery_multiplier + self.mastery_points_since_last_level/5000000
         elif self.mastery_level == 0:
-            mastery_multiplier = 0.6
+            mastery_multiplier = 0.2
         elif self.mastery_level == 1:
+            mastery_multiplier = 0.4
+        elif self.mastery_level == 2:
             mastery_multiplier = 0.8
-        else: 
-            mastery_multipler = 1 + (self.mastery_level**2)
+        elif self.mastery_level == 3: 
+            mastery_multipler = 1
+        else:
+            mastery_multipler = 1.05
         self.rating = int(base_rating * (self.overall_win_percent/50) * (personal/50) * (matchup/50) * mastery_multiplier)
 
 class ChampionDetailGenerator(object):
