@@ -56,10 +56,13 @@ class ChampionPickGenerator(object):
     def get_champ_data_by_role(self):
         """Gets champion data by role and puts it into a list."""
         try:
-            data = requests.get("http://api.champion.gg/stats/role/"+self.role+"?limit=1000").json()
-            # data = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 1})
-            #if len(data['data']) == 50:
-            #    next_page = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 2})
+            data = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 1})
+            if len(data['data']) == 50:
+                next_page = py_gg.stats.role(self.role, None, None, p={'limit':50, 'page': 2})
+                for champ in next_page['data']:
+                    id = self.champion_mapping[champ['name']]
+                    champ_obj = ChampionPick(champ['name'], champ['key'], id,  self.lol_version, champ['general']['winPercent'])
+                    self.champions.append(champ_obj)
             for champ in data['data']:
                 id = self.champion_mapping[champ['name']]
                 champ_obj = ChampionPick(champ['name'], champ['key'], id,  self.lol_version, champ['general']['winPercent'])
